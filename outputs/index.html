@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b1015">
+<meta name="description" content="星核迷航：一个可离线游玩的十关迷宫小游戏。收集星核，避开激光，找到出口。">
+<title>星核迷航 · 再向未知走一步</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='13' fill='%23c6f785'/%3E%3Cpath d='M13 33V14h22v19H23V24h5' fill='none' stroke='%23111b19' stroke-width='4'/%3E%3C/svg%3E">
+<style>
+:root{color-scheme:dark;--bg:#0b1015;--panel:#12191f;--line:#253038;--muted:#81909c;--text:#ecf1f2;--mint:#c6f785;--teal:#78d9c2;--gold:#f4ce7f;--violet:#b2a0ed;--red:#f28b92;font-family:Inter,"Segoe UI","Microsoft YaHei",system-ui,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-size:14px}button{font:inherit;cursor:pointer;color:inherit}button:disabled{cursor:not-allowed}button:focus-visible,canvas:focus-visible,summary:focus-visible{outline:2px solid var(--mint);outline-offset:5px}button{touch-action:manipulation}button svg{pointer-events:none}svg.icon{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}.sprite{position:absolute;width:0;height:0;overflow:hidden}button{border:0}button:hover:not(:disabled){filter:brightness(1.1)}[hidden]{display:none!important}
+.site-header{height:84px;border-bottom:1px solid #20292f;display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:auto;padding:0 2px}.brand{display:flex;gap:12px;align-items:center}.brand-mark{width:38px;height:38px;border-radius:11px;background:var(--mint);color:#1c2a22;display:grid;place-items:center}.brand-mark svg{width:24px;height:24px}.brand-name{font-size:17px;font-weight:700;letter-spacing:1px}.brand-name small{color:var(--muted);font-size:10px;letter-spacing:3px;display:block;margin-top:3px;font-weight:500}.header-actions{display:flex;align-items:center;gap:25px}.small-status{font-size:12px;color:#9aa9b1;display:flex;align-items:center;gap:8px}.status-dot{width:6px;height:6px;border-radius:50%;background:var(--mint)}.ghost-button{display:flex;gap:8px;align-items:center;background:none;border:1px solid var(--line);border-radius:8px;padding:10px 14px;font-size:12px;color:#c5cdd1}.page{max-width:1200px;margin:0 auto;padding:36px 0 24px}.hero{display:flex;justify-content:space-between;align-items:center;margin-bottom:29px}.eyebrow{display:flex;align-items:center;gap:10px;letter-spacing:2.4px;font-size:10px;color:#94a1aa;font-weight:600}.eyebrow b{font-weight:400;color:#53616d}.eyebrow span:last-child{color:var(--mint);letter-spacing:1px}.hero h1{font-size:38px;font-weight:650;letter-spacing:4px;line-height:1.3;margin:13px 0 9px}.hero h1 span{color:var(--mint);font-size:14px;font-weight:400;letter-spacing:0;vertical-align:middle;margin-left:13px;border:1px solid #3c4931;padding:5px 10px;border-radius:20px}.hero p{font-size:13px;color:#8e9ba5;margin:0;letter-spacing:1px}.journey{display:flex;align-items:center;gap:15px;padding:15px 23px 15px 18px;border-left:1px solid var(--line)}.journey-ring{position:relative;width:53px;height:53px}.journey-ring svg{width:53px;height:53px;transform:rotate(-90deg)}.journey-ring span{position:absolute;inset:0;display:grid;place-items:center;font-size:16px;font-weight:650;color:var(--mint)}.journey-copy strong{display:block;font-size:13px;font-weight:500;margin-bottom:7px}.journey-copy small{font-size:11px;color:var(--muted)}
+.levels{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:23px}.level-tab{background:#11181e;border:1px solid #252e35;border-radius:10px;padding:15px 17px;display:flex;align-items:center;gap:12px;text-align:left;position:relative;min-height:71px}.level-tab.current{border-color:#9fbe70;background:#1a251d}.level-num{font-family:Consolas,monospace;font-size:19px;font-weight:500;color:#596571;letter-spacing:-1px}.current .level-num{color:var(--mint)}.level-tab.done .level-num{color:var(--teal)}.level-name{display:block;font-size:12px;margin-bottom:6px;letter-spacing:.5px}.level-desc{font-size:9px;color:var(--muted);letter-spacing:1px}.level-tab:disabled .level-name{color:#88949f}.level-tab:disabled{opacity:.62}.level-lock{margin-left:auto;color:#6c7882;width:14px!important;height:14px!important}.level-tab.current:after{content:"";position:absolute;width:5px;height:5px;background:var(--mint);border-radius:50%;right:15px;top:17px}
+.game-layout{display:grid;grid-template-columns:minmax(0,1fr) 286px;gap:22px;align-items:start}.game-panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}.board-header{padding:17px 23px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #252f35;min-height:66px}.board-title{display:flex;align-items:center;gap:12px}.sector-tag{font-size:10px;letter-spacing:1.5px;font-family:Consolas,monospace;padding:5px 7px;background:#242e33;color:#9eb1bb;border-radius:4px}.board-title h2{font-size:14px;font-weight:500;letter-spacing:1px;margin:0}.board-state{font-size:10px;letter-spacing:1px;color:var(--mint);display:flex;align-items:center;gap:7px}.board-state i{display:block;width:5px;height:5px;border-radius:50%;background:currentColor}.canvas-stage{position:relative;margin:19px 22px 0;background:#0b1219;border:1px solid #26333e;border-radius:9px;padding:11px;overflow:hidden}.canvas-stage:before,.canvas-stage:after{content:"";position:absolute;width:13px;height:13px;pointer-events:none;z-index:1;border-color:#70857b}.canvas-stage:before{top:0;left:0;border-left:2px solid;border-top:2px solid;color:#6d866b}.canvas-stage:after{bottom:0;right:0;border-right:2px solid;border-bottom:2px solid;color:#6d866b}canvas{display:block;width:100%;aspect-ratio:13/9;touch-action:none;outline:none}.legend{display:flex;align-items:center;gap:24px;margin:18px 25px 17px;font-size:10px;color:#a3aeb5;flex-wrap:wrap}.legend span{display:flex;align-items:center;gap:8px}.legend-player{width:11px;height:11px;border:3px solid var(--mint);border-radius:3px;background:#283a36}.legend-core{width:8px;height:8px;background:var(--gold);transform:rotate(45deg)}.legend-exit{width:11px;height:13px;border:1.5px solid var(--teal);border-radius:2px}.legend-trap{width:12px;height:10px;background:repeating-linear-gradient(90deg,#f18b93 0 2px,transparent 2px 5px)}.legend-shield{width:11px;height:12px;background:var(--mint);clip-path:polygon(50% 0,100% 25%,100% 65%,50% 100%,0 65%,0 25%)}.legend-freeze{width:11px;height:11px;border:2px solid #8fd3ff;border-radius:50%;background:#1f3a4a;box-sizing:border-box}.legend-boots{width:12px;height:10px;background:#f4ce7f;clip-path:polygon(0 0,55% 0,55% 45%,100% 45%,100% 100%,0 100%)}.legend-monster{width:11px;height:11px;background:#c63848;clip-path:polygon(50% 0,100% 30%,100% 70%,50% 100%,0 70%,0 30%)}.legend-boss{width:13px;height:13px;background:radial-gradient(circle,#b2a0ed 35%,#8b3a8e 75%);border-radius:50%;box-shadow:0 0 0 2px #b2a0ed}.coordinate{margin-left:auto;color:#637381;font-family:Consolas,monospace;letter-spacing:1px}.effects-row{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid #323144}.effect-chip{display:inline-flex;align-items:center;gap:5px;font-size:10px;color:#c5c4d5;background:#1d1d2e;padding:4px 8px;border-radius:5px;border:1px solid #38384f}.effect-chip svg{width:12px;height:12px;color:#8fd3ff}.effect-chip.boots svg{color:#f4ce7f}.effect-chip b{color:var(--mint);font-weight:600;font-family:Consolas,monospace}.board-footer{display:flex;gap:12px;align-items:center;justify-content:space-between;background:#151e25;border-top:1px solid #27323a;padding:13px 23px}.board-footer p{margin:0;color:#94a4af;font-size:11px;line-height:1.6}.board-footer p b{color:var(--mint);font-weight:500}.hint-button{display:flex;align-items:center;gap:6px;background:transparent;color:#b8c3ca;font-size:11px;white-space:nowrap;padding:4px}.hint-button svg{width:15px;height:15px}.sidebar{display:flex;flex-direction:column;gap:15px}.card{border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:21px}.card-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}.card-heading h3{font-size:12px;font-weight:500;letter-spacing:1px;margin:0}.micro-label{font-size:9px;letter-spacing:1.3px;color:#738591;font-family:Consolas,monospace}.explorer{display:flex;gap:12px;align-items:center;margin-bottom:22px}.avatar{width:46px;height:46px;background:#28382b;border:1px solid #43533c;border-radius:11px;display:grid;place-items:center;color:var(--mint)}.avatar svg{width:29px;height:29px}.explorer-name strong{font-size:13px;font-weight:500;display:block}.explorer-name span{display:flex;gap:6px;font-size:10px;color:#a1aeaa;margin-top:6px;align-items:center}.explorer-name i{width:5px;height:5px;background:var(--mint);border-radius:50%}.shield-row{display:flex;align-items:center;justify-content:space-between;font-size:11px;color:#8c9da7;margin-bottom:21px}.hearts{display:flex;gap:7px;color:var(--mint)}.heart{width:17px;height:17px;fill:currentColor}.heart.empty{color:#354048;fill:none;stroke:currentColor;stroke-width:1.6}.stats{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #273139;padding-top:17px}.stat+ .stat{border-left:1px solid #2a343b;padding-left:24px}.stat-label{font-size:10px;color:#899ba8;margin-bottom:7px}.stat-value{font-size:30px;font-family:Consolas,monospace;font-weight:400;letter-spacing:-1px}.stat-value small{font-size:14px;color:#6d8290;margin-left:3px}.stat-value.core{color:var(--gold)}.mission-label{display:flex;gap:8px;align-items:center;font-size:12px;margin-bottom:16px}.mission-label svg{color:var(--violet)}.mission{padding:18px 20px;background:#171b27;border-color:#323146}.objective{font-size:12px;line-height:1.8;color:#c5c4d5}.objective span{color:var(--gold)}.core-progress{height:4px;background:#303140;border-radius:5px;margin:14px 0 12px;overflow:hidden}.core-progress div{height:100%;background:var(--violet);width:0}.mission-note{font-size:10px;color:#8c8b9f;display:flex;justify-content:space-between;gap:8px}.trap-phase{display:flex;gap:8px;align-items:center;color:#e399a0;font-size:10px;margin-top:13px;padding-top:12px;border-top:1px solid #323144;line-height:1.6}.trap-phase.safe{color:var(--teal)}.controls-card{padding:18px 20px}.control-top{display:flex;align-items:center;justify-content:space-between;font-size:11px;margin-bottom:13px}.control-top span{font-size:9px;color:#788a97}.control-body{display:flex;align-items:center;gap:20px}.dpad{display:grid;grid-template-columns:repeat(3,34px);grid-template-rows:repeat(2,32px);gap:4px}.direction{display:grid;place-items:center;border:1px solid #394751;background:#1f2b34;border-bottom:3px solid #33424c;border-radius:5px;color:#b6c6d0;padding:0}.direction:active{background:#3c503b;border-color:var(--mint);color:var(--mint)}.direction svg{width:15px;height:15px}.direction.up{grid-column:2}.direction.left{grid-column:1;grid-row:2}.direction.down{grid-column:2;grid-row:2}.direction.right{grid-column:3;grid-row:2}.wait-button{background:#202b34;border:1px solid #35444f;color:#a9bac7;border-radius:5px;font-size:10px;padding:9px 10px;margin-top:4px;white-space:nowrap}.wait-note{font-size:9px;color:#748591;margin-top:8px;text-align:center}.restart-button{width:100%;display:flex;align-items:center;justify-content:center;gap:9px;background:var(--mint);color:#25321c;border-radius:8px;padding:12px 14px;font-weight:600;font-size:12px}.restart-button small{font-size:9px;opacity:.65;border:1px solid #738a50;border-radius:3px;padding:2px 4px;margin-left:auto}.restart-button svg{width:15px}.restart-button span{margin-left:auto}.bottom-strip{display:flex;justify-content:space-between;gap:20px;padding:21px 2px;color:#677985;font-size:10px;letter-spacing:.3px}.bottom-strip span{display:flex;align-items:center;gap:7px}.bottom-strip svg{width:13px;height:13px;color:#82976e}.bottom-strip b{font-weight:400;color:#a1b77d}.page-footer{border-top:1px solid #202a32;padding-top:21px;display:flex;justify-content:space-between;color:#526672;font-size:9px;letter-spacing:1.5px}.page-footer span:last-child{letter-spacing:1px}
+.overlay{position:absolute;inset:0;background:#091017eF;display:flex;align-items:safe center;justify-content:center;padding:24px;z-index:3;overflow-y:auto;overscroll-behavior:contain}.result{max-width:360px;text-align:center;width:100%;flex-shrink:0}.result-symbol{margin:0 auto 17px;width:67px;height:67px;border:1px solid #69814f;border-radius:20px;background:#253224;color:var(--mint);display:grid;place-items:center}.result-symbol svg{width:33px;height:33px}.result-label{font-family:Consolas,monospace;letter-spacing:3px;font-size:10px;color:var(--mint)}.result h2{font-size:27px;letter-spacing:2px;margin:12px 0}.result p{font-size:12px;color:#99a9b4;line-height:1.9}.result-stars{display:flex;justify-content:center;gap:13px;color:var(--gold);margin:17px 0}.result-stars svg{width:28px;height:28px;fill:currentColor;stroke:currentColor}.result-stars svg.off{color:#34404a}.primary{background:var(--mint);color:#25321c;padding:12px 20px;border-radius:7px;font-weight:600;font-size:12px}.result .primary{width:100%;margin-top:8px}.result .secondary{background:none;color:#8fa1ae;font-size:11px;margin-top:16px;padding:5px 12px}.toast{position:fixed;left:50%;bottom:27px;transform:translateX(-50%);background:#26342e;border:1px solid #5f7850;color:#e0edce;border-radius:9px;padding:13px 21px;z-index:20;font-size:12px;box-shadow:0 6px 30px #0006;max-width:calc(100% - 36px);width:max-content;text-align:center;line-height:1.7;pointer-events:none}dialog{width:min(480px,calc(100vw - 32px));background:#141e27;color:var(--text);border:1px solid #3c4a54;border-radius:16px;padding:28px;box-shadow:0 20px 100px #0009}dialog::backdrop{background:#060b11ba}dialog h2{font-size:22px;margin:8px 0 20px;letter-spacing:2px}dialog .close{position:absolute;right:18px;top:17px;background:none;color:#9eb0bb;padding:5px}dialog ol{padding-left:23px;color:#b1c1ca;font-size:13px;line-height:2}dialog li{padding-left:5px;margin-bottom:10px}dialog strong{font-weight:500;color:var(--mint)}dialog .primary{display:block;margin-top:22px;width:100%}.help-detail{font-size:11px;color:#7f95a5;border-top:1px solid #30404c;padding-top:16px;line-height:1.9}kbd{font-family:inherit;border:1px solid #405563;border-bottom-width:2px;border-radius:4px;padding:1px 5px;font-size:10px;color:#d2dde3;background:#24333f}
+@media(min-width:1500px){.page{padding-top:44px}.hero{margin-bottom:35px}.site-header{height:92px}}
+@media(max-width:1250px){.site-header{margin:0 28px}.page{margin:0 28px}.game-layout{grid-template-columns:minmax(0,1fr) 260px;gap:18px}.level-tab{padding:14px 12px;gap:9px}.card{padding:18px}.canvas-stage{margin:18px 18px 0}.legend{gap:18px;margin-left:20px;margin-right:20px}.legend .coordinate{display:none}.control-body{gap:13px}.board-footer{padding-left:18px;padding-right:18px}}
+@media(max-width:900px){.site-header{height:73px}.page{padding-top:27px}.hero h1{font-size:32px}.game-layout{grid-template-columns:minmax(0,1fr) 229px;gap:14px}.levels{gap:8px}.level-tab{gap:8px;padding:13px 10px}.level-desc{font-size:8px;letter-spacing:0}.level-name{font-size:11px}.level-num{font-size:16px}.level-lock{display:none}.board-header{padding:15px}.board-title{gap:7px}.board-title h2{font-size:12px}.canvas-stage{margin:12px 11px 0;padding:6px}.legend{gap:15px;font-size:9px;margin:15px}.board-footer{align-items:flex-start;gap:8px;padding:12px 14px}.board-footer p{font-size:10px}.hint-button{font-size:10px}.card{padding:16px}.card-heading{margin-bottom:16px}.explorer{margin-bottom:16px}.shield-row{margin-bottom:17px}.control-body{gap:10px}.dpad{grid-template-columns:repeat(3,31px);grid-template-rows:repeat(2,30px)}.journey{padding-right:0}.hero p{letter-spacing:0}.sidebar{gap:12px}.stat-value{font-size:26px}}
+@media(max-width:700px){.site-header{margin:0 20px;height:72px}.brand-name{font-size:15px}.brand-name small{font-size:8px}.header-actions{gap:10px}.small-status{display:none}.ghost-button{padding:9px 10px;font-size:11px}.page{margin:0 16px;padding-top:24px}.hero{margin-bottom:23px;align-items:flex-end}.hero h1{font-size:31px;letter-spacing:3px}.hero h1 span{font-size:10px;margin-left:6px;padding:4px 7px;letter-spacing:0}.hero p{font-size:11px;margin-top:7px;max-width:235px;line-height:1.8}.journey{border:0;padding:0 0 6px 10px;gap:0}.journey-copy{display:none}.journey-ring,.journey-ring svg{width:43px;height:43px}.journey-ring span{font-size:13px}.eyebrow{font-size:8px;gap:8px}.levels{gap:6px;margin-bottom:15px}.level-tab{flex-direction:column;align-items:flex-start;gap:7px;padding:11px 9px;min-height:76px;border-radius:8px}.level-name{font-size:10px;margin-bottom:0;letter-spacing:0}.level-num{font-size:16px}.level-desc{display:none}.level-tab.current:after{right:10px;top:15px;width:4px;height:4px}.game-layout{display:flex;flex-direction:column;gap:14px}.game-panel{width:100%;border-radius:11px}.board-header{padding:13px 15px;min-height:53px}.board-state{font-size:9px}.sector-tag{font-size:8px}.board-title h2{font-size:12px}.canvas-stage{margin:11px 11px 0;padding:5px}.legend{margin:15px;gap:20px;font-size:9px}.board-footer{padding:12px 14px}.sidebar{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;align-items:stretch}.profile-card{grid-column:1;grid-row:1}.mission{grid-column:1;grid-row:2}.controls-card{grid-column:2;grid-row:1 / span 2;display:flex;flex-direction:column;justify-content:center}.card{padding:16px}.card-heading{margin-bottom:16px}.explorer{display:none}.shield-row{margin-bottom:15px;font-size:10px}.stats{padding-top:13px}.stat+.stat{padding-left:13px}.stat-value{font-size:27px}.stat-value small{font-size:12px}.stat-label{font-size:9px}.micro-label{font-size:8px}.card-heading h3{font-size:11px}.hearts{gap:4px}.heart{width:15px;height:15px}.mission-label{font-size:11px;margin-bottom:9px}.objective{font-size:10px}.core-progress{margin:12px 0 9px}.mission-note{font-size:9px;flex-wrap:wrap;gap:4px}.control-top{flex-direction:column;gap:8px;margin-bottom:18px;font-size:12px}.control-body{flex-direction:column;gap:15px}.dpad{grid-template-columns:repeat(3,35px);grid-template-rows:repeat(2,35px);gap:5px}.wait-button{min-width:95px}.wait-note{margin-top:7px}.sidebar>.restart-button{grid-column:1 / -1;min-height:44px}.bottom-strip{font-size:9px;padding:18px 0;gap:12px;line-height:1.8;align-items:flex-start}.bottom-strip span{align-items:flex-start;gap:5px}.bottom-strip span:last-child{text-align:right;display:block}.bottom-strip svg{margin-top:2px}.page-footer{font-size:8px;padding-top:18px;padding-bottom:7px;letter-spacing:.7px}.overlay{padding:14px}.result-symbol{display:none}.result h2{font-size:20px;margin:7px 0}.result p{font-size:10px;margin:6px 0;line-height:1.6}.result-label{font-size:8px}.result-stars{margin:8px 0;gap:10px}.result-stars svg{width:20px;height:20px}.result .primary{padding:9px;font-size:11px;margin-top:5px}.result .secondary{margin-top:5px;font-size:10px;padding:3px 12px}.result{max-width:270px}}
+@media(max-width:370px){.hero h1{font-size:27px}.hero h1 span{display:none}.journey{display:none}.legend{gap:14px}.card{padding:12px}.dpad{grid-template-columns:repeat(3,31px)}.board-footer p{max-width:200px}.hero p{max-width:100%}}
+</style>
+</head>
+<body>
+<svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+<symbol id="i-maze" viewBox="0 0 24 24"><path d="M4 19V5h16v14h-9v-7h4"/></symbol>
+<symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 .5c0 1.8-2.5 2-2.5 4M12 17h.01"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V6a4 4 0 0 1 8 0v4M12 14v3"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21 3.8 13A5.5 5.5 0 0 1 12 5.7 5.5 5.5 0 0 1 20.2 13Z"/></symbol>
+<symbol id="i-robot" viewBox="0 0 24 24"><path d="M12 2v3M9 2h6"/><rect x="4" y="5" width="16" height="15" rx="4"/><path d="M1 10v6m22-6v6"/><rect x="7" y="8" width="10" height="7" rx="2"/><path d="M9 11h.01M15 11h.01M9 18h6"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><path d="M12 1v3m0 16v3M1 12h3m16 0h3"/></symbol>
+<symbol id="i-up" viewBox="0 0 24 24"><path d="m6 14 6-6 6 6"/></symbol>
+<symbol id="i-left" viewBox="0 0 24 24"><path d="m14 6-6 6 6 6"/></symbol>
+<symbol id="i-down" viewBox="0 0 24 24"><path d="m6 10 6 6 6-6"/></symbol>
+<symbol id="i-right" viewBox="0 0 24 24"><path d="m10 6 6 6-6 6"/></symbol>
+<symbol id="i-restart" viewBox="0 0 24 24"><path d="M3 10a9 9 0 1 1 1 8M3 4v6h6"/></symbol>
+<symbol id="i-bulb" viewBox="0 0 24 24"><path d="M8 16c0-3-3-3-3-7a7 7 0 0 1 14 0c0 4-3 4-3 7M8 17h8m-7 3h6m-5 2h4"/></symbol>
+<symbol id="i-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12l4 4v12a2 2 0 0 1-2 2Z"/><path d="M7 3v6h9V3M7 21v-8h10v8"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3.1 6.3 7 .9-5.1 4.9 1.2 7-6.2-3.3-6.2 3.3 1.2-7L2 9.2l7-.9Z"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+<symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 22V3m0 0c5-4 9 4 14 0v12c-5 4-9-4-14 0"/></symbol>
+<symbol id="i-monster" viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7Z"/><path d="M9 11h.01M15 11h.01M9 15h6"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4 3 7 7 9 4-2 7-5 7-9V6Z"/><path d="M9 12l2 2 4-4"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></symbol>
+<symbol id="i-boots" viewBox="0 0 24 24"><path d="M7 3h4v9c0 2 1 3 3 3h3v5H5v-4l2-2V3Z"/></symbol>
+</defs></svg>
+<header class="site-header"><div class="brand"><span class="brand-mark"><svg class="icon"><use href="#i-maze"/></svg></span><div class="brand-name">一格宇宙<small>ONE GRID STUDIO</small></div></div><div class="header-actions"><span class="small-status"><i class="status-dot"></i> 单人探索 · 离线可玩</span><button class="ghost-button" id="helpButton"><svg class="icon"><use href="#i-help"/></svg>玩法指南</button></div></header>
+<main class="page">
+<section class="hero"><div><div class="eyebrow"><span>THE MINI ARCADE</span><b>/</b><span>益智冒险 · NO. 001</span></div><h1>星核迷航<span>步步有解</span></h1><p>收集微光，穿过迷宫。再向未知走一步。</p></div><div class="journey"><div class="journey-ring"><svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="24" fill="none" stroke="#2a3631" stroke-width="3"/><circle id="journeyCircle" cx="28" cy="28" r="24" fill="none" stroke="#c6f785" stroke-width="3" stroke-linecap="round" stroke-dasharray="150.8" stroke-dashoffset="150.8"/></svg><span id="journeyCount">0/5</span></div><div class="journey-copy"><strong>你的探索旅程</strong><small id="journeyText">五个星区，等你点亮</small></div></div></section>
+<nav class="levels" id="levelTabs" aria-label="选择关卡"></nav>
+<div class="game-layout">
+<section class="game-panel" aria-label="游戏区域"><div class="board-header"><div class="board-title"><span class="sector-tag" id="sectorTag">SECTOR 01</span><h2 id="levelTitle">初次着陆</h2></div><div class="board-state"><i></i><span id="boardState">准备就绪</span></div></div>
+<div class="canvas-stage"><canvas id="game" width="728" height="504" tabindex="0" aria-label="迷宫棋盘，使用方向键或WASD移动。收集全部星核后走到出口。">请使用支持 Canvas 的现代浏览器游玩。也可使用右侧方向按钮。</canvas><div class="overlay" id="resultOverlay" hidden><div class="result"><div class="result-symbol"><svg class="icon"><use id="resultIcon" href="#i-flag"/></svg></div><div class="result-label" id="resultLabel">SECTOR COMPLETE</div><h2 id="resultTitle">星区探索完成</h2><div class="result-stars" id="resultStars" aria-label="三星"></div><p id="resultText"></p><button class="primary" id="nextButton">前往下一星区 →</button><button class="secondary" id="replayButton">再试一次，刷新纪录</button></div></div></div>
+<div class="legend"><span><i class="legend-player"></i>探索者</span><span><i class="legend-core"></i>星核</span><span><i class="legend-exit"></i>出口</span><span><i class="legend-trap"></i>激光</span><span><i class="legend-shield"></i>护盾补给</span><span><i class="legend-freeze"></i>冻结钟</span><span><i class="legend-boots"></i>闪现靴</span><span><i class="legend-monster"></i>暗影兽</span><span><i class="legend-boss"></i>暗核守卫</span><span class="coordinate" id="coordinate">X:01 / Y:01</span></div>
+<div class="board-footer"><p id="levelTip"><b>探索提示</b> 不必着急，这里没有倒计时。</p><button class="hint-button" id="hintButton"><svg class="icon"><use href="#i-bulb"/></svg>航线提示</button></div></section>
+<aside class="sidebar" aria-label="探索状态与操作">
+<section class="card profile-card"><div class="card-heading"><h3>探索者档案</h3><span class="micro-label">PLAYER 01</span></div><div class="explorer"><div class="avatar"><svg class="icon"><use href="#i-robot"/></svg></div><div class="explorer-name"><strong>小小探索者</strong><span><i></i>已连接 · 信号良好</span></div></div><div class="shield-row"><span>剩余护盾</span><div class="hearts" id="hearts" role="img" aria-label="3格护盾"></div></div><div class="stats"><div class="stat"><div class="stat-label">探索步数</div><div class="stat-value" id="moveCount">00</div></div><div class="stat"><div class="stat-label">已收集星核</div><div class="stat-value core"><span id="coreCount">0</span><small id="coreTotal">/ 3</small></div></div></div></section>
+<section class="card mission"><div class="mission-label"><svg class="icon"><use href="#i-target"/></svg>当前任务</div><div class="objective" id="objective">收集全部 <span>3 枚星核</span><br>点亮出口，前往下一星区。</div><div class="core-progress" role="progressbar" id="coreProgress" aria-label="星核收集进度" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0"><div id="coreBar"></div></div><div class="mission-note"><span id="exitNote">出口尚未激活</span><span id="parNote">三星 ≤ 40 步</span></div><div class="trap-phase" id="trapPhase" hidden></div><div class="effects-row" id="effectsRow" hidden></div><div class="trap-phase" id="bossRow" hidden></div></section>
+<section class="card controls-card"><div class="control-top">方向控制<span>方向键 / W A S D</span></div><div class="control-body"><div class="dpad"><button class="direction up" data-move="up" aria-label="向上移动"><svg class="icon"><use href="#i-up"/></svg></button><button class="direction left" data-move="left" aria-label="向左移动"><svg class="icon"><use href="#i-left"/></svg></button><button class="direction down" data-move="down" aria-label="向下移动"><svg class="icon"><use href="#i-down"/></svg></button><button class="direction right" data-move="right" aria-label="向右移动"><svg class="icon"><use href="#i-right"/></svg></button></div><div><button class="wait-button" id="waitButton">原地等待</button><div class="wait-note">SPACE / 空格</div></div></div></section>
+<button class="restart-button" id="restartButton"><svg class="icon"><use href="#i-restart"/></svg><span>重新探索本关</span><small>R</small></button>
+</aside></div>
+<div class="bottom-strip"><span><svg class="icon"><use href="#i-save"/></svg><span id="saveNote">通关记录自动保存在此浏览器，无需登录。</span></span><span>小提示：<b>满护盾 + 目标步数内通关</b>，即可获得三星。</span></div>
+<footer class="page-footer"><span>ONE GRID. ENDLESS CURIOSITY.</span><span>15 个星区 · 随时出发</span></footer>
+</main>
+<dialog id="helpDialog" aria-labelledby="helpTitle"><button class="close" id="closeHelp" aria-label="关闭玩法指南"><svg class="icon"><use href="#i-close"/></svg></button><span class="eyebrow">EXPLORER'S HANDBOOK</span><h2 id="helpTitle">每一步，都算数。</h2><ol><li>用 <strong>方向键 / WASD</strong> 移动，或点击方向按钮。手机上也可在棋盘滑动。</li><li>收集所有<strong>金色星核</strong>后，走进亮起的<strong>绿色出口</strong>，即可解锁下一关。</li><li>第 2 关起出现激光。激光每 <strong>2 步</strong>切换开关；每次移动或等待，<strong>先切换，再检查脚下</strong>。踩中开启的激光会损失 1 格护盾。</li><li>第 11 关起出现<strong>暗影兽</strong>：你每走一步，它就追一步。被它抓住会扣 1 护盾，随后它退回巢穴，给你喘息之机。</li>
+<li>第 14 关起出现<strong>暗核守卫</strong>（BOSS）：血量 3 格，会追击你。引它踩中<strong>开启的激光</strong>可让它掉血，三次击溃即可打通通道。撞上它会扣 1 护盾，它退回原点并陷入晕眩 2 回合。</li><li>关卡中散落道具：<strong>护盾补给</strong>恢复 1 格护盾；<strong>冻结钟</strong>让暗影兽静止 4 步；<strong>闪现靴</strong>让你接下来 2 步免疫激光。</li><li>用 <kbd>空格</kbd> 原地等待机关关闭，或点击<strong>航线提示</strong>获取下一步建议。护盾归零后可无限重试。</li></ol><div class="help-detail">撞墙不计步。站在开启的激光上等待同样会受伤。<br>满护盾且在目标步数内通关获三星；至少 2 格护盾获二星；其余成功通关获一星。<br><kbd>R</kbd> 重开当前关卡。关卡与最佳纪录保存在当前浏览器；浏览器限制存储时，仍可正常游玩。</div><button class="primary" id="startButton">明白了，出发 →</button></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<script>
+'use strict';
+const LEVELS = [
+ {name:'初次着陆',subtitle:'FIRST CONTACT',par:40,tip:'不必着急，这里没有倒计时。',map:[
+ '#############',
+ '#S....#....E#',
+ '#.##..#..##.#',
+ '#..*.....*..#',
+ '###.#.#.#.###',
+ '#...#...#...#',
+ '#.###.#.###.#',
+ '#.....*.....#',
+ '#############']},
+ {name:'微光回廊',subtitle:'GLOWING PATH',par:48,tip:'观察激光的节奏，空格可以原地等待。',map:[
+ '#############',
+ '#S..#...*..E#',
+ '#.#.#.###.#.#',
+ '#.#...^...#.#',
+ '#.###.#.###.#',
+ '#...*.#.....#',
+ '#.###.###.^.#',
+ '#.....*.....#',
+ '#############']},
+ {name:'交错星轨',subtitle:'CROSSING ORBITS',par:64,tip:'先规划收集顺序，少走回头路。',map:[
+ '#############',
+ '#S....#....E#',
+ '###.#.#.#.#.#',
+ '#*..#.^.#.*.#',
+ '#.###.#.###.#',
+ '#...^...^...#',
+ '#.#.#####.#.#',
+ '#...*...*...#',
+ '#############']},
+ {name:'静默深空',subtitle:'SILENT SPACE',par:68,tip:'激光每两步切换，耐心也是一种超能力。',map:[
+ '#############',
+ '#S..#..*#..E#',
+ '#.#.#.#.#.#.#',
+ '#.#.^.#...#.#',
+ '#.###.###^#.#',
+ '#*..#...#...#',
+ '#.#.#^#.#.#.#',
+ '#...*...^.*.#',
+ '#############']},
+ {name:'群星归途',subtitle:'WAY BACK HOME',par:76,tip:'最后一段旅程，每一枚微光都值得带回家。',map:[
+ '#############',
+ '#S..^..#*..E#',
+ '#.###^.#.#^##',
+ '#*..#..^.#..#',
+ '###.#.###.#.#',
+ '#...^..*..#.#',
+ '#.#.###^###.#',
+ '#...*..^....#',
+ '#############']},
+
+ {name:'潮汐回响',subtitle:'TIDAL ECHO',par:70,tip:'激光像潮汐起伏，找准空隙穿过。',map:[
+ '#############',
+ '#S..^....*.E#',
+ '#...........#',
+ '#.#.^.#.#.^.#',
+ '#.*........*#',
+ '#.#.^.#.#.^.#',
+ '#...........#',
+ '#..^.*...^..#',
+ '#############']},
+
+ {name:'镜面对称',subtitle:'MIRROR FIELD',par:74,tip:'左右对称，捷径藏在镜像里。',map:[
+ '#############',
+ '#S.........E#',
+ '#.#.#.#.#.#.#',
+ '#.^.*...*.^.#',
+ '#.#.#.#.#.#.#',
+ '#.*...^...*.#',
+ '#.#.#.#.#.#.#',
+ '#.^.*...*.^.#',
+ '#############']},
+
+ {name:'螺旋深井',subtitle:'SPIRAL WELL',par:80,tip:'向深处盘旋而下，星核藏在转折处。',map:[
+ '#############',
+ '#S.........E#',
+ '#.#.#####.#.#',
+ '#.*...^...*.#',
+ '#.#.#####.#.#',
+ '#.#.#.#.#.#.#',
+ '#.*.^...^.*.#',
+ '#.#.#####.#.#',
+ '#############']},
+
+ {name:'迷雾裂谷',subtitle:'MIST RIFT',par:84,tip:'浓雾之中激光隐现，耐心是最好的指南针。',map:[
+ '#############',
+ '#S.^.^..*..E#',
+ '#...........#',
+ '#.#.#.#.#.#.#',
+ '#.*..^...^..#',
+ '#.#.#.#.#.#.#',
+ '#...........#',
+ '#^.*.^.^..*.#',
+ '#############']},
+
+ {name:'终极归途',subtitle:'FINAL HORIZON',par:90,tip:'最后的旅程，所有微光都值得带回家。',map:[
+ '#############',
+ '#S.^.^.*.^.E#',
+ '#.#.#.#.#.#.#',
+ '#.*..^...^..#',
+ '#.###.#.###.#',
+ '#...^.*.^...#',
+ '#.###.#.###.#',
+ '#^.*.^.^..*.#',
+ '#############']},
+
+ {name:'暗影追猎',subtitle:'SHADOW HUNT',par:60,tip:'暗影兽会追逐你的足迹，捡起冻结钟让它停下。',map:[
+ '#############',
+ '#S..H...*..E#',
+ '#...........#',
+ '#.###.#.###.#',
+ '#...M.....F.#',
+ '#.#.#.#.#.#.#',
+ '#.*.........#',
+ '#...........#',
+ '#############']},
+
+ {name:'失控回路',subtitle:'ROGUE CIRCUIT',par:78,tip:'两只暗影兽在回路中游荡，护盾补给能多撑一次。',map:[
+ '#############',
+ '#S.^.*.^.*.E#',
+ '#...........#',
+ '#.#####.#####',
+ '#.H.M...F.M.#',
+ '#####.###.###',
+ '#.*.........#',
+ '#..^.^...^.^#',
+ '#############']},
+
+ {name:'终焉追逐',subtitle:'FINAL CHASE',par:92,tip:'最后的暗影兽群，闪现靴帮你冲过致命激光。',map:[
+ '#############',
+ '#S.^.^.*.^.E#',
+ '#.#.#.#.#.#.#',
+ '#.H.M...F.M.#',
+ '#.###.#.###.#',
+ '#.*.........#',
+ '#.#.#.#.#.#.#',
+ '#.^.*.^.^.*.#',
+ '#############']},
+
+ {name:'暗核守卫',subtitle:'CORE WARDEN',par:80,tip:'暗核守卫血量更厚，引它踩中激活的激光三次即可击溃。',map:[
+ '#############',
+ '#S....*....E#',
+ '#.#.#.#.#.#.#',
+ '#.^.*...^.^.#',
+ '#.....H.....#',
+ '#.#.^.^.^.#.#',
+ '#.*.........#',
+ '#.^.*...^..@#',
+ '#############']},
+
+ {name:'星核终焉',subtitle:'STARFALL FINAL',par:96,tip:'终局之战：最后的暗核守卫，引领它穿越密集激光。',map:[
+ '#############',
+ '#S.^.*.^.^.E#',
+ '#...........#',
+ '#.^.*.^.^.^.#',
+ '#...H...B...#',
+ '#.^.^.^.*.^.#',
+ '#...........#',
+ '#.^.*.^.^..@#',
+ '#############']}
+];
+const $ = id => document.getElementById(id);
+const canvas = $('game'), ctx = canvas.getContext('2d');const TILE=56;
+const STORAGE_KEY = 'one-grid-starquest-v1';
+const DIRS = {up:[0,-1],right:[1,0],down:[0,1],left:[-1,0],wait:[0,0]};
+const DIR_NAMES = {up:'向上',right:'向右',down:'向下',left:'向左',wait:'原地等待'};
+let store = {records:{},lastLevel:0}, storageAvailable = true;
+try {
+ const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+ if(raw && typeof raw === 'object' && raw.records && typeof raw.records === 'object') {
+  for(let i=0;i<LEVELS.length;i++) {
+   const r=raw.records[i];
+   if(r && Number.isInteger(r.moves) && r.moves>0 && Number.isInteger(r.stars) && r.stars>=1 && r.stars<=3) store.records[i]={moves:r.moves,stars:r.stars};
+  }
+  if(Number.isInteger(raw.lastLevel)) store.lastLevel=Math.max(0,Math.min(LEVELS.length-1,raw.lastLevel));
+ }
+} catch (_) {storageAvailable=false;}
+let state, toastTimer, hintDirection=null, lastKeyTime=0;
+let anim={stars:[],particles:[],shake:0,time:0,playerRX:0,playerRY:0,hoverX:null,hoverY:null};
+let staticCanvas=null,staticCtx=null,staticDpr=0,bgGradient=null;
+function initStars(){anim.stars=[];for(let i=0;i<70;i++)anim.stars.push({x:Math.random()*728,y:Math.random()*504,r:Math.random()*1.4+0.3,s:Math.random()*0.25+0.05,tw:Math.random()*6.28,hue:Math.random()<0.2?'#c6f785':Math.random()<0.5?'#78d9c2':'#e8f0f5'});}
+function spawnBurst(x,y,color){for(let i=0;i<14;i++){const a=Math.random()*6.28,sp=Math.random()*2.5+0.6;anim.particles.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,life:1,color,r:Math.random()*2+1});}}
+function addShake(n){anim.shake=Math.min(anim.shake+n,10);}
+function animate(time){if(!state){requestAnimationFrame(animate);return;}anim.time=time/1000;anim.playerRX+=(state.x-anim.playerRX)*0.28;anim.playerRY+=(state.y-anim.playerRY)*0.28;anim.shake*=0.85;anim.particles=anim.particles.filter(p=>{p.x+=p.vx;p.y+=p.vy;p.vx*=0.96;p.vy*=0.96;p.vy+=0.04;p.life-=0.03;return p.life>0;});draw();requestAnimationFrame(animate);}
+function drawNebula(W,H){[{x:W*0.2,y:H*0.3,c:'rgba(178,160,237,0.10)'},{x:W*0.8,y:H*0.7,c:'rgba(120,217,194,0.08)'},{x:W*0.5,y:H*0.5,c:'rgba(198,247,133,0.06)'}].forEach(b=>{const r=140+Math.sin(anim.time*0.3)*20;const g=ctx.createRadialGradient(b.x,b.y,0,b.x,b.y,r);g.addColorStop(0,b.c);g.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.fillRect(b.x-r,b.y-r,r*2,r*2);});}
+function drawStars(W,H){anim.stars.forEach(s=>{s.x-=s.s;if(s.x<0)s.x=W;const tw=0.4+0.6*Math.abs(Math.sin(anim.time*s.s*4+s.tw));ctx.globalAlpha=tw;ctx.fillStyle=s.hue;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill();});ctx.globalAlpha=1;}
+function icon(name,extra=''){return `<svg class="icon ${extra}" aria-hidden="true"><use href="#i-${name}"/></svg>`;}
+function unlocked(){let i=0;while(i<LEVELS.length-1 && store.records[i]) i++;return i;}
+function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(store));}catch(_){storageAvailable=false;}if(!storageAvailable)$('saveNote').textContent='当前浏览器未允许存储，进度仅保留到本页关闭。';}
+function notify(text){clearTimeout(toastTimer);$('toast').textContent=text;$('toast').hidden=false;toastTimer=setTimeout(()=>{$('toast').hidden=true;},3400);}
+function parseMap(level){const cores=[],traps=[],items=[],monsters=[],bosses=[];let start,exit;level.map.forEach((row,y)=>[...row].forEach((c,x)=>{if(c==='S')start={x,y};else if(c==='E')exit={x,y};else if(c==='*')cores.push({x,y});else if(c==='^')traps.push({x,y});else if(c==='H'||c==='F'||c==='B')items.push({x,y,type:c});else if(c==='M')monsters.push({x,y,spawnX:x,spawnY:y,frozen:0});else if(c==='@')bosses.push({x,y,spawnX:x,spawnY:y,hp:3,stunned:0});}));return {cores,traps,items,monsters,bosses,start,exit};}
+function loadLevel(index){
+ if(index<0 || index>unlocked() || index>=LEVELS.length)return;
+ const info=parseMap(LEVELS[index]);
+ state={level:index,x:info.start.x,y:info.start.y,moves:0,hp:3,mask:0,cores:info.cores,traps:info.traps,items:info.items,monsters:info.monsters,bosses:info.bosses,exit:info.exit,over:false,won:false,freezeTurns:0,bootsTurns:0};
+ hintDirection=null;store.lastLevel=index;save();$('resultOverlay').hidden=true;clearTimeout(toastTimer);$('toast').hidden=true;
+ if(info.bosses && info.bosses.length)setTimeout(()=>notify('警告：暗核守卫出现！引它踩中激活的激光，三次击溃。'),420);
+ anim.playerRX=info.start.x;anim.playerRY=info.start.y;anim.particles=[];anim.shake=0;anim.hoverX=null;anim.hoverY=null;
+ renderStatic();
+ $('sectorTag').textContent=`SECTOR ${String(index+1).padStart(2,'0')}`;$('levelTitle').textContent=LEVELS[index].name;
+ $('levelTip').innerHTML='<b>探索提示</b> '+LEVELS[index].tip;
+ $('coreTotal').textContent='/ '+state.cores.length;$('parNote').textContent=`三星 ≤ ${LEVELS[index].par} 步`;
+ $('coreProgress').setAttribute('aria-valuemax',state.cores.length);
+ renderTabs();updateUI();draw();
+}
+function renderTabs(){
+ const max=unlocked();$('levelTabs').innerHTML=LEVELS.map((l,i)=>{
+  const r=store.records[i];const isLocked=i>max;
+  return `<button class="level-tab ${i===state.level?'current ':''}${r?'done':''}" data-level="${i}" ${isLocked?'disabled':''} ${i===state.level?'aria-current="step"':''} aria-label="第${i+1}关 ${l.name}${isLocked?'，尚未解锁':r?'，已通关，'+r.stars+'星':'，可挑战'}"><span class="level-num">${String(i+1).padStart(2,'0')}</span><span><span class="level-name">${l.name}</span><span class="level-desc">${r?'BEST '+r.moves+' STEPS':l.subtitle}</span></span>${isLocked?icon('lock','level-lock'):r?icon('check','level-lock'):''}</button>`;
+ }).join('');
+ const count=Object.keys(store.records).length;$('journeyCount').textContent=count+'/'+LEVELS.length;$('journeyCircle').setAttribute('stroke-dashoffset',150.8*(1-count/LEVELS.length));
+ $('journeyText').textContent=count===LEVELS.length?'全部星区已被你点亮':count?`已点亮 ${count} 个星区，继续出发`:`${LEVELS.length} 个星区，等你点亮`;
+}
+function popcount(mask){let n=0;while(mask){n+=mask&1;mask>>=1;}return n;}
+function laserActive(moves){return Math.floor(moves/2)%2===0;}
+function updateUI(){
+ const collected=popcount(state.mask),all=collected===state.cores.length;
+ $('moveCount').textContent=String(state.moves).padStart(2,'0');$('coreCount').textContent=collected;
+ $('hearts').innerHTML=Array.from({length:3},(_,i)=>`<svg class="heart ${i>=state.hp?'empty':''}" aria-hidden="true"><use href="#i-heart"/></svg>`).join('');
+ $('hearts').setAttribute('aria-label',state.hp+'格护盾');$('coreBar').style.width=collected/state.cores.length*100+'%';$('coreProgress').setAttribute('aria-valuenow',collected);
+ $('objective').innerHTML=all?'星核收集完成！<br>前往<span style="color:var(--teal)">绿色出口</span>，完成探索。':`收集全部 <span>${state.cores.length} 枚星核</span><br>点亮出口，前往下一星区。${state.monsters.length?'<br>小心<span style="color:#f28b92">暗影兽</span>的追逐。':''}${state.bosses&&state.bosses.length?'<br>击败<span style="color:#b2a0ed">暗核守卫</span>：引它踩激活的激光。':''}`;
+ $('exitNote').textContent=all?'出口已激活':'出口尚未激活';$('exitNote').style.color=all?'var(--teal)':'';
+ // 暗核守卫状态行
+ const br=$('bossRow');
+ if(state.bosses && state.bosses.length){
+  br.hidden=false;br.className='trap-phase'+(state.bosses.some(b=>b.stunned>0)?' safe':'');
+  br.innerHTML=state.bosses.map(b=>{const hearts=Array.from({length:3},(_,i)=>`<svg class="heart ${i>=b.hp?'empty':''}" style="width:13px;height:13px" aria-hidden="true"><use href="#i-heart"/></svg>`).join('');return `<span style="display:flex;align-items:center;gap:5px">暗核守卫 ${hearts}${b.stunned>0?`<small style="color:#9aa9b1">晕眩 ${b.stunned}</small>`:''}</span>`;}).join('');
+ } else { br.hidden=true; }
+ $('boardState').textContent=state.over?(state.won?'星区已点亮':'等待重新出发'):(state.moves?'探索进行中':'准备就绪');
+ $('coordinate').textContent=`X:${String(state.x).padStart(2,'0')} / Y:${String(state.y).padStart(2,'0')}`;
+ $('trapPhase').hidden=!state.traps.length;
+ if(state.traps.length){const active=laserActive(state.moves);$('trapPhase').className='trap-phase'+(active?'':' safe');$('trapPhase').textContent=`激光：${active?'开启':'关闭'} · 下步${laserActive(state.moves+1)?'危险，勿踩入':'安全，可以通过'}`;}
+ const eff=$('effectsRow');const chips=[];
+ if(state.freezeTurns>0)chips.push(`<span class="effect-chip">${icon('clock')}冻结 <b>${state.freezeTurns}</b></span>`);
+ if(state.bootsTurns>0)chips.push(`<span class="effect-chip boots">${icon('boots')}闪现 <b>${state.bootsTurns}</b></span>`);
+ if(chips.length){eff.hidden=false;eff.innerHTML=chips.join('');}else eff.hidden=true;
+ canvas.setAttribute('aria-label',`第${state.level+1}关，探索者在第${state.y+1}行第${state.x+1}列，${state.hp}格护盾，已收集${collected}/${state.cores.length}枚星核，${state.moves}步。`);
+ document.querySelectorAll('[data-move],#waitButton,#hintButton').forEach(b=>b.disabled=state.over);
+}
+function move(direction){
+ if(!state || state.over || $('helpDialog').open)return;
+ const delta=DIRS[direction];if(!delta)return;
+ const nx=state.x+delta[0],ny=state.y+delta[1],tile=LEVELS[state.level].map[ny]?.[nx];
+ if(!tile || tile==='#'){notify('前方是墙壁，试试另一条路。');return;}
+ state.x=nx;state.y=ny;state.moves++;hintDirection=null;
+ // 拾取道具（捡起后立即生效）
+ state.items=state.items.filter(it=>{
+  if(it.x===nx&&it.y===ny){
+   const cx=nx*TILE+TILE/2,cy=ny*TILE+TILE/2;
+   if(it.type==='H'){state.hp=Math.min(3,state.hp+1);spawnBurst(cx,cy,'#c6f785');notify('护盾补给！+1 护盾。');}
+   else if(it.type==='F'){state.freezeTurns=4;spawnBurst(cx,cy,'#8fd3ff');notify('冻结钟启动！暗影兽静止 4 步。');}
+   else if(it.type==='B'){state.bootsTurns=2;spawnBurst(cx,cy,'#f4ce7f');notify('闪现靴激活！接下来 2 步免疫激光。');}
+   return false;
+  }
+  return true;
+ });
+ // 收集星核
+ state.cores.forEach((c,i)=>{if(c.x===nx&&c.y===ny&&!(state.mask&(1<<i))){state.mask|=1<<i;spawnBurst(c.x*TILE+TILE/2,c.y*TILE+TILE/2,'#f6d58c');notify(popcount(state.mask)===state.cores.length?'所有星核已集齐，绿色出口已点亮！':'收集到一枚星核，继续探索。');}});
+ // 激光伤害（闪现靴期间免疫）
+ if(tile==='^'&&laserActive(state.moves)&&state.bootsTurns<=0){state.hp--;addShake(6);notify(state.hp?'激光击中！护盾 -1，留意右侧的下步提示。':'护盾耗尽，重新出发也没关系。');}
+ // 撞上暗影兽
+ state.monsters.forEach(m=>{if(m.x===nx&&m.y===ny){state.hp--;addShake(8);m.x=m.spawnX;m.y=m.spawnY;notify(state.hp?'撞上暗影兽！护盾 -1，它退回巢穴。':'护盾耗尽。');}});
+ // 撞上暗核守卫
+ state.bosses.forEach(b=>{if(b.x===nx&&b.y===ny){state.hp--;addShake(10);b.x=b.spawnX;b.y=b.spawnY;b.stunned=2;notify(state.hp?'撞上暗核守卫！护盾 -1，它退回原点并陷入晕眩。':'护盾耗尽。');}});
+ if(state.hp<=0){finish(false);return;}
+ // 抵达出口（若有 BOSS 须先击溃）
+ if(tile==='E'){
+  const bossAlive=state.bosses && state.bosses.length>0;
+  if(state.mask===(1<<state.cores.length)-1 && !bossAlive){finish(true);return;}
+  const need=[];const coreNeed=state.cores.length-popcount(state.mask);if(coreNeed>0)need.push(`${coreNeed} 枚星核`);if(bossAlive)need.push('击败暗核守卫');
+  notify('出口还在休眠，还需 '+need.join('、')+'。');
+ }
+ // 闪现靴步数递减
+ if(state.bootsTurns>0)state.bootsTurns--;
+ // 暗影兽行动
+ moveMonsters();
+ if(state.hp<=0){finish(false);return;}
+ updateUI();draw();
+}
+// 暗影兽 / 暗核守卫 AI：冻结时不动；否则用 BFS 朝玩家走一步。
+// 暗影兽撞玩家：扣护盾，退回巢穴。
+// 暗核守卫撞玩家：扣护盾，退回原点 + 晕眩 2 回合；移动后若踩到激活激光则掉血，血量归零即被击溃。
+function moveMonsters(){
+ if(!state.monsters.length && !(state.bosses&&state.bosses.length))return;
+ if(state.freezeTurns>0){state.freezeTurns--;return;}
+ const dirs=[[0,-1],[1,0],[0,1],[-1,0]],level=LEVELS[state.level];
+ // 暗影兽
+ state.monsters.forEach(m=>{
+  if(m.x===state.x&&m.y===state.y)return;
+  const prev=new Map(),startK=m.x+','+m.y;prev.set(startK,null);
+  const queue=[{x:m.x,y:m.y}];let goalK=null;
+  while(queue.length){
+   const cur=queue.shift();
+   if(cur.x===state.x&&cur.y===state.y){goalK=cur.x+','+cur.y;break;}
+   for(const [dx,dy] of dirs){
+    const nx=cur.x+dx,ny=cur.y+dy;
+    if(nx<0||ny<0||nx>=13||ny>=9)continue;
+    if(level.map[ny][nx]==='#')continue;
+    const k=nx+','+ny;if(prev.has(k))continue;
+    prev.set(k,cur.x+','+cur.y);queue.push({x:nx,y:ny});
+   }
+  }
+  if(goalK){let k=goalK;while(prev.get(k)!==startK)k=prev.get(k);const [sx,sy]=k.split(',').map(Number);m.x=sx;m.y=sy;}
+ });
+ state.monsters.forEach(m=>{if(m.x===state.x&&m.y===state.y){state.hp--;addShake(8);m.x=m.spawnX;m.y=m.spawnY;notify(state.hp?'暗影兽抓住了你！护盾 -1，它退回巢穴。':'护盾耗尽，重新出发。');}});
+ // 暗核守卫
+ if(state.bosses && state.bosses.length){
+ state.bosses.forEach(b=>{
+  if(b.stunned>0){b.stunned--;return;}
+  if(b.x===state.x&&b.y===state.y)return;
+  const prev=new Map(),startK=b.x+','+b.y;prev.set(startK,null);
+  const queue=[{x:b.x,y:b.y}];let goalK=null;
+  while(queue.length){
+   const cur=queue.shift();
+   if(cur.x===state.x&&cur.y===state.y){goalK=cur.x+','+cur.y;break;}
+   for(const [dx,dy] of dirs){
+    const nx=cur.x+dx,ny=cur.y+dy;
+    if(nx<0||ny<0||nx>=13||ny>=9)continue;
+    if(level.map[ny][nx]==='#')continue;
+    const k=nx+','+ny;if(prev.has(k))continue;
+    prev.set(k,cur.x+','+cur.y);queue.push({x:nx,y:ny});
+   }
+  }
+  if(goalK){let k=goalK;while(prev.get(k)!==startK)k=prev.get(k);const [sx,sy]=k.split(',').map(Number);b.x=sx;b.y=sy;}
+  // 守卫踩到激活激光 → 掉血
+  const tile=level.map[b.y]?.[b.x];
+  if(tile==='^'&&laserActive(state.moves)){
+   b.hp--;const bx=b.x*TILE+TILE/2,by=b.y*TILE+TILE/2;
+   spawnBurst(bx,by,'#b2a0ed');addShake(6);
+   if(b.hp<=0){for(let i=0;i<26;i++){const a=Math.random()*6.28,sp=Math.random()*4+1;anim.particles.push({x:bx,y:by,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,life:1,color:Math.random()<0.5?'#b2a0ed':'#f4ce7f',r:Math.random()*3+1.5});}addShake(10);notify('暗核守卫被激光击溃！通道已打通。');}
+   else notify(`激光命中暗核守卫！剩余 ${b.hp} 血。`);
+  }
+ });
+ state.bosses.forEach(b=>{if(b.hp>0&&b.x===state.x&&b.y===state.y){state.hp--;addShake(10);b.x=b.spawnX;b.y=b.spawnY;b.stunned=2;notify(state.hp?'暗核守卫抓住你！护盾 -1，它退回原点并陷入晕眩。':'护盾耗尽。');}});
+ state.bosses=state.bosses.filter(b=>b.hp>0);
+ }
+}
+function finish(won){
+ state.over=true;state.won=won;hintDirection=null;const stars=won?(state.hp===3&&state.moves<=LEVELS[state.level].par?3:state.hp>=2?2:1):0;
+ if(won){const old=store.records[state.level];store.records[state.level]={moves:old?Math.min(old.moves,state.moves):state.moves,stars:old?Math.max(old.stars,stars):stars};save();renderTabs();}
+ updateUI();draw();$('resultOverlay').hidden=false;$('resultIcon').setAttribute('href',won?'#i-flag':'#i-restart');
+ $('resultLabel').textContent=won?(state.level===LEVELS.length-1?'MISSION ACCOMPLISHED':'SECTOR COMPLETE'):'READY FOR ANOTHER TRY';
+ $('resultTitle').textContent=won?(state.level===LEVELS.length-1?'群星，为你点亮':'又一片星区被点亮'):'休整一下，再出发';
+ $('resultStars').hidden=!won;$('resultStars').innerHTML=Array.from({length:3},(_,i)=>icon('star',i<stars?'':'off')).join('');$('resultStars').setAttribute('aria-label',stars+'星');
+ $('resultText').textContent=won?`用了 ${state.moves} 步 · 剩余 ${state.hp} 格护盾 · 获得 ${stars} 星${state.level===LEVELS.length-1?'。全部星区已点亮，旅程完成！':'。下一段旅程，已经准备好。'}`:'护盾已耗尽。激光每 2 步切换，试试原地等待，让危险先过去。';
+ $('nextButton').textContent=won?(state.level===LEVELS.length-1?'回到起点，挑战满星 →':'前往下一星区 →'):'重新探索本关 →';$('replayButton').hidden=!won;
+ $('nextButton').focus({preventScroll:true});
+}
+function renderStatic(){
+ if(!staticCanvas){staticCanvas=document.createElement('canvas');staticCtx=staticCanvas.getContext('2d');}
+ const T=TILE,W=13*T,H=9*T,dpr=Math.min(window.devicePixelRatio||1,2);
+ staticDpr=dpr;staticCanvas.width=W*dpr;staticCanvas.height=H*dpr;
+ staticCtx.setTransform(dpr,0,0,dpr,0,0);staticCtx.clearRect(0,0,W,H);
+ const level=LEVELS[state.level];
+ const r2=(x,y,w,h,r)=>{staticCtx.beginPath();staticCtx.roundRect(x,y,w,h,r);};
+ level.map.forEach((row,y)=>[...row].forEach((tile,x)=>{
+  const px=x*T,py=y*T;
+  if(tile==='#'){
+   r2(px+3,py+3,T-6,T-6,5);staticCtx.fillStyle='#1c2b36';staticCtx.fill();staticCtx.strokeStyle='#2c3d49';staticCtx.lineWidth=1;staticCtx.stroke();
+   staticCtx.fillStyle='#304350';staticCtx.fillRect(px+10,py+5,T-20,1);staticCtx.fillStyle='#13212b';staticCtx.fillRect(px+8,py+T-8,T-16,3);
+   staticCtx.fillStyle='#405260';staticCtx.fillRect(px+10,py+11,2,2);staticCtx.fillStyle='#324550';staticCtx.fillRect(px+T-12,py+T-13,2,2);
+   if((x+y*3)%7===0){staticCtx.strokeStyle='#30414e';staticCtx.lineWidth=1;staticCtx.beginPath();staticCtx.moveTo(px+15,py+T/2-3);staticCtx.lineTo(px+T-15,py+T/2-3);staticCtx.moveTo(px+15,py+T/2+3);staticCtx.lineTo(px+T-15,py+T/2+3);staticCtx.stroke();}
+  }else{
+   r2(px+2,py+2,T-4,T-4,3);staticCtx.fillStyle=((x+y)%2)?'rgba(14,24,33,0.55)':'rgba(16,26,35,0.55)';staticCtx.fill();staticCtx.strokeStyle='#17252f';staticCtx.lineWidth=1;staticCtx.stroke();
+   staticCtx.fillStyle='#243441';staticCtx.fillRect(px+T/2-1,py+T/2-1,2,2);
+  }
+ }));
+}
+function round(x,y,w,h,r,fill,stroke){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=1;ctx.stroke();}}
+function draw(){
+ if(!state)return;const T=TILE,W=13*T,H=9*T,dpr=Math.min(window.devicePixelRatio||1,2);
+ if(canvas.width!==W*dpr||canvas.height!==H*dpr){canvas.width=W*dpr;canvas.height=H*dpr;}
+ if(staticDpr!==dpr||!staticCanvas)renderStatic();
+ ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+ const sxk=(Math.random()-0.5)*anim.shake,syk=(Math.random()-0.5)*anim.shake;ctx.save();ctx.translate(sxk,syk);
+ if(!bgGradient){bgGradient=ctx.createLinearGradient(0,0,0,H);bgGradient.addColorStop(0,'#0a141f');bgGradient.addColorStop(0.5,'#0b1019');bgGradient.addColorStop(1,'#070d14');}
+ ctx.fillStyle=bgGradient;ctx.fillRect(-20,-20,W+40,H+40);
+ drawNebula(W,H);drawStars(W,H);
+ ctx.drawImage(staticCanvas,0,0,W,H);
+ const level=LEVELS[state.level];
+ // 激光（动态闪烁，单独绘制）
+ level.map.forEach((row,y)=>{[...row].forEach((tile,x)=>{if(tile!=='^')return;
+  const px=x*T,py=y*T,active=laserActive(state.moves),flk=active?(0.65+Math.sin(anim.time*14)*0.35):1;
+  round(px+7,py+7,T-14,T-14,5,active?`rgba(58,32,43,${flk})`:'#18272c',active?'#76434e':'#365056');
+  for(let i=0;i<3;i++){ctx.fillStyle=active?`rgba(239,146,156,${flk})`:'#3c6567';ctx.fillRect(px+15+i*12,py+14,2,T-28);}
+  ctx.fillStyle=active?'#efa7ad':'#68898c';ctx.fillRect(px+10,py+9,4,3);ctx.fillRect(px+T-14,py+T-12,4,3);
+ });});
+ // 出口
+ const ex=state.exit.x*T,ey=state.exit.y*T,open=state.mask===(1<<state.cores.length)-1;
+ ctx.save();if(open){ctx.shadowColor='#8cdeb0';ctx.shadowBlur=16+Math.sin(anim.time*3)*8;}
+ round(ex+10,ey+6,36,45,7,open?'#253e34':'#172b2a',open?'#b9f490':'#476c61');
+ round(ex+16,ey+12,24,32,3,open?'#93d77c':'#28413b');ctx.restore();
+ ctx.strokeStyle=open?'#23412d':'#56776c';ctx.lineWidth=2;ctx.beginPath();
+ if(open){ctx.moveTo(ex+22,ey+28);ctx.lineTo(ex+35,ey+28);ctx.moveTo(ex+29,ey+22);ctx.lineTo(ex+35,ey+28);ctx.lineTo(ex+29,ey+34);}else{ctx.roundRect(ex+23,ey+26,10,9,2);ctx.moveTo(ex+25,ey+26);ctx.lineTo(ex+25,ey+23);ctx.bezierCurveTo(ex+25,ey+18,ex+31,ey+18,ex+31,ey+23);ctx.lineTo(ex+31,ey+26);}ctx.stroke();
+ // 道具（护盾补给/冻结钟/闪现靴）
+ state.items.forEach(it=>{
+  const cx=it.x*T+T/2,cy=it.y*T+T/2,ps=1+Math.sin(anim.time*2.5+it.x+it.y)*0.12;
+  const color=it.type==='H'?'#c6f785':it.type==='F'?'#8fd3ff':'#f4ce7f';
+  ctx.save();ctx.shadowColor=color;ctx.shadowBlur=12+Math.sin(anim.time*3+it.x)*4;ctx.fillStyle=color;
+  if(it.type==='H'){ctx.beginPath();ctx.moveTo(cx,cy-12*ps);ctx.lineTo(cx+9*ps,cy-6*ps);ctx.lineTo(cx+9*ps,cy+4*ps);ctx.lineTo(cx,cy+12*ps);ctx.lineTo(cx-9*ps,cy+4*ps);ctx.lineTo(cx-9*ps,cy-6*ps);ctx.closePath();ctx.fill();ctx.strokeStyle='#1c2a22';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(cx-4,cy-2);ctx.lineTo(cx-1,cy+2);ctx.lineTo(cx+5,cy-4);ctx.stroke();}
+  else if(it.type==='F'){ctx.beginPath();ctx.arc(cx,cy,11*ps,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#0b2a35';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(cx,cy-7);ctx.lineTo(cx,cy);ctx.lineTo(cx+5,cy+3);ctx.stroke();ctx.fillStyle='#0b2a35';ctx.fillRect(cx-1,cy-12*ps,2,3);}
+  else{ctx.beginPath();ctx.moveTo(cx-8*ps,cy-8);ctx.lineTo(cx+2*ps,cy-8);ctx.lineTo(cx+2*ps,cy+2);ctx.lineTo(cx+8*ps,cy+2);ctx.lineTo(cx+8*ps,cy+8);ctx.lineTo(cx-8*ps,cy+8);ctx.closePath();ctx.fill();ctx.strokeStyle='#5a4220';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(cx-8,cy-8);ctx.lineTo(cx+2,cy-8);ctx.stroke();}
+  ctx.restore();
+ });
+ if(anim.hoverX!=null){const hx=anim.hoverX*T,hy=anim.hoverY*T;ctx.strokeStyle='rgba(198,247,133,0.35)';ctx.lineWidth=1.5;ctx.setLineDash([3,3]);ctx.strokeRect(hx+3,hy+3,T-6,T-6);ctx.setLineDash([]);}
+ // 星核
+ state.cores.forEach((core,i)=>{if(state.mask&(1<<i))return;const cx=core.x*T+T/2,cy=core.y*T+T/2;
+  const ps=1+Math.sin(anim.time*3+i)*0.14;
+  ctx.save();ctx.shadowColor='#d6a14b';ctx.shadowBlur=15+Math.sin(anim.time*4+i)*5;ctx.fillStyle='#f6d58c';ctx.beginPath();ctx.moveTo(cx,cy-13*ps);ctx.lineTo(cx+10*ps,cy);ctx.lineTo(cx,cy+13*ps);ctx.lineTo(cx-10*ps,cy);ctx.closePath();ctx.fill();ctx.restore();
+  ctx.fillStyle='#ffedb9';ctx.beginPath();ctx.moveTo(cx,cy-13*ps);ctx.lineTo(cx,cy);ctx.lineTo(cx-10*ps,cy);ctx.closePath();ctx.fill();ctx.strokeStyle='#866d44';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(cx-18,cy);ctx.lineTo(cx-15,cy);ctx.moveTo(cx+15,cy);ctx.lineTo(cx+18,cy);ctx.stroke();
+ });
+ // 暗影兽
+ state.monsters.forEach(m=>{
+  const mx=m.x*T+T/2,my=m.y*T+T/2,frozen=state.freezeTurns>0,pulse=1+Math.sin(anim.time*4+m.x)*0.08;
+  ctx.save();ctx.shadowColor=frozen?'#8fd3ff':'#f28b92';ctx.shadowBlur=18+Math.sin(anim.time*5+m.x)*6;ctx.fillStyle=frozen?'#5a7a8a':'#c63848';
+  ctx.beginPath();ctx.moveTo(mx,my-16*pulse);ctx.lineTo(mx+14*pulse,my-4);ctx.lineTo(mx+14*pulse,my+8);ctx.lineTo(mx,my+16);ctx.lineTo(mx-14*pulse,my+8);ctx.lineTo(mx-14*pulse,my-4);ctx.closePath();ctx.fill();ctx.restore();
+  ctx.fillStyle=frozen?'#bfe9ff':'#ffe9a0';ctx.beginPath();ctx.arc(mx-5,my-2,2.5,0,Math.PI*2);ctx.arc(mx+5,my-2,2.5,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#1a0a0e';ctx.beginPath();ctx.arc(mx-5,my-2,1.2,0,Math.PI*2);ctx.arc(mx+5,my-2,1.2,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle=frozen?'#8fd3ff':'#5a1822';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(mx-5,my+5);ctx.lineTo(mx-2,my+7);ctx.lineTo(mx+2,my+5);ctx.lineTo(mx+5,my+7);ctx.stroke();
+  if(frozen){ctx.strokeStyle='rgba(143,211,255,0.5)';ctx.lineWidth=1;ctx.beginPath();ctx.arc(mx,my,21,0,Math.PI*2);ctx.stroke();}
+ });
+ // 暗核守卫 BOSS（紫红主体 + 旋转尖刺 + 王冠 + 三眼 + 血条）
+ (state.bosses||[]).forEach(b=>{
+  const bx=b.x*T+T/2,by=b.y*T+T/2,stunned=b.stunned>0,pulse=1+Math.sin(anim.time*3+b.x)*0.1;
+  ctx.save();ctx.shadowColor=stunned?'#6e6e88':'#b2a0ed';ctx.shadowBlur=24+Math.sin(anim.time*4+b.x)*8;
+  // 主体
+  ctx.fillStyle=stunned?'#54546e':'#8b3a8e';ctx.beginPath();ctx.arc(bx,by,22*pulse,0,Math.PI*2);ctx.fill();
+  // 旋转尖刺
+  ctx.fillStyle=stunned?'#6e6e88':'#b2a0ed';
+  for(let i=0;i<8;i++){const a=i*Math.PI/4+anim.time*0.3;const r1=19*pulse,r2=28*pulse;ctx.beginPath();ctx.moveTo(bx+Math.cos(a)*r1,by+Math.sin(a)*r1);ctx.lineTo(bx+Math.cos(a+0.22)*r2,by+Math.sin(a+0.22)*r2);ctx.lineTo(bx+Math.cos(a-0.22)*r2,by+Math.sin(a-0.22)*r2);ctx.closePath();ctx.fill();}
+  // 王冠
+  ctx.fillStyle=stunned?'#8a8aa3':'#f4ce7f';ctx.beginPath();ctx.moveTo(bx-13,by-17);ctx.lineTo(bx-9,by-24);ctx.lineTo(bx-5,by-18);ctx.lineTo(bx-1,by-24);ctx.lineTo(bx+3,by-18);ctx.lineTo(bx+7,by-24);ctx.lineTo(bx+11,by-18);ctx.lineTo(bx+13,by-17);ctx.closePath();ctx.fill();
+  // 三只眼
+  ctx.fillStyle=stunned?'#9a9ab0':'#fff5a0';
+  for(let i=0;i<3;i++){const ex=bx-10+i*10,ey=by-2;ctx.beginPath();ctx.arc(ex,ey,3,0,Math.PI*2);ctx.fill();}
+  ctx.fillStyle='#1a0a1e';
+  for(let i=0;i<3;i++){const ex=bx-10+i*10,ey=by-2;ctx.beginPath();ctx.arc(ex+Math.sin(anim.time*2)*0.6,ey,1.5,0,Math.PI*2);ctx.fill();}
+  // 锯齿嘴
+  ctx.strokeStyle=stunned?'#5a5a72':'#3a0a3e';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(bx-9,by+8);ctx.lineTo(bx-6,by+11);ctx.lineTo(bx-3,by+8);ctx.lineTo(bx,by+11);ctx.lineTo(bx+3,by+8);ctx.lineTo(bx+6,by+11);ctx.lineTo(bx+9,by+8);ctx.stroke();
+  ctx.restore();
+  // 血条
+  const bw=44,bh=4,bbx=bx-bw/2,bby=by-32;
+  ctx.fillStyle='#1a1a2e';ctx.fillRect(bbx-1,bby-1,bw+2,bh+2);
+  ctx.fillStyle='#3a2a4e';ctx.fillRect(bbx,bby,bw,bh);
+  ctx.fillStyle=stunned?'#8a8aa3':'#f28b92';ctx.fillRect(bbx,bby,bw*b.hp/3,bh);
+  // 晕眩圈
+  if(stunned){ctx.strokeStyle='rgba(180,180,200,0.55)';ctx.lineWidth=1.5;ctx.setLineDash([3,3]);ctx.beginPath();ctx.arc(bx,by,30,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);}
+ });
+ if(hintDirection){const d=DIRS[hintDirection],hx=(state.x+d[0])*T,hy=(state.y+d[1])*T;ctx.strokeStyle='#b5d9a2';ctx.lineWidth=2;ctx.setLineDash([4,4]);ctx.strokeRect(hx+5,hy+5,T-10,T-10);ctx.setLineDash([]);}
+ anim.particles.forEach(p=>{ctx.globalAlpha=Math.max(0,p.life);ctx.fillStyle=p.color;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();});ctx.globalAlpha=1;
+ const px=anim.playerRX*T,py=anim.playerRY*T;
+ ctx.fillStyle='rgba(0,0,0,0.4)';ctx.beginPath();ctx.ellipse(px+28,py+45,19,6,0,0,Math.PI*2);ctx.fill();
+ const aura=0.5+Math.sin(anim.time*2.5)*0.5;ctx.save();ctx.globalAlpha=aura*0.5;ctx.fillStyle=state.hp?'#c6f785':'#f28b92';ctx.beginPath();ctx.arc(px+28,py+25,24,0,Math.PI*2);ctx.fill();ctx.restore();
+ if(state.bootsTurns>0){ctx.strokeStyle='rgba(244,206,127,0.6)';ctx.lineWidth=2;ctx.beginPath();ctx.arc(px+28,py+25,27,0,Math.PI*2);ctx.stroke();}
+ round(px+9,py+24,8,15,3,'#7a9b62');round(px+39,py+24,8,15,3,'#7a9b62');round(px+17,py+38,8,10,2,'#9abb7a');round(px+31,py+38,8,10,2,'#9abb7a');
+ ctx.save();ctx.shadowColor=state.hp?'#b7e588':'#f28b92';ctx.shadowBlur=12;round(px+13,py+10,30,31,8,state.hp?'#c6f785':'#d29398','#e0fbc4');ctx.restore();
+ round(px+16,py+17,24,16,5,'#253e40');round(px+18,py+18,19,5,2,'#37595a');ctx.fillStyle='#c6efde';ctx.fillRect(px+21,py+23,3,5);ctx.fillRect(px+32,py+23,3,5);ctx.fillStyle='#809b64';ctx.fillRect(px+24,py+36,8,2);ctx.fillStyle='#e5ffbe';ctx.fillRect(px+27,py+6,3,5);
+ ctx.restore();
+}
+// A breadth-first search over position, collected cores and the 4-turn laser cycle.
+// It refuses any damaging move, so every suggestion preserves the current shields.
+function solve(s=state){
+ const level=LEVELS[s.level],goal=(1<<s.cores.length)-1;
+ const encode=(x,y,mask,phase)=>`${x},${y},${mask},${phase}`;
+ const initial={x:s.x,y:s.y,mask:s.mask,phase:s.moves%4,previous:-1,dir:null};const queue=[initial];
+ const visited=new Set([encode(initial.x,initial.y,initial.mask,initial.phase)]);
+ for(let head=0;head<queue.length;head++){
+  const cur=queue[head];
+  if(cur.x===s.exit.x&&cur.y===s.exit.y&&cur.mask===goal){const path=[];let i=head;while(queue[i].previous>=0){path.push(queue[i].dir);i=queue[i].previous;}return path.reverse();}
+  for(const [dir,[dx,dy]] of Object.entries(DIRS)){
+   const x=cur.x+dx,y=cur.y+dy,tile=level.map[y]?.[x],phase=(cur.phase+1)%4;
+   if(!tile||tile==='#'||(tile==='^'&&laserActive(phase)))continue;
+   let mask=cur.mask;s.cores.forEach((c,i)=>{if(c.x===x&&c.y===y)mask|=1<<i;});const key=encode(x,y,mask,phase);
+   if(visited.has(key))continue;visited.add(key);queue.push({x,y,mask,phase,previous:head,dir});
+  }
+ }
+ return null;
+}
+$('levelTabs').addEventListener('click',event=>{const button=event.target.closest('[data-level]');if(button&&!button.disabled)loadLevel(Number(button.dataset.level));});
+document.querySelectorAll('[data-move]').forEach(button=>button.addEventListener('click',()=>move(button.dataset.move)));
+$('waitButton').addEventListener('click',()=>move('wait'));
+$('restartButton').addEventListener('click',()=>{loadLevel(state.level);notify('本关已重置，向新的路线出发。');});
+$('nextButton').addEventListener('click',()=>{loadLevel(state.won?(state.level+1)%LEVELS.length:state.level);canvas.focus({preventScroll:true});});
+$('replayButton').addEventListener('click',()=>{loadLevel(state.level);canvas.focus({preventScroll:true});});
+$('hintButton').addEventListener('click',()=>{const path=solve();if(path?.length){hintDirection=path[0];const hasThreat=(state.monsters.length>0)||(state.bosses&&state.bosses.length>0);notify(`航线建议：${DIR_NAMES[path[0]]}${path[0]==='wait'?'一步，让激光先切换。':'一格。虚线框已标出位置。'}${hasThreat?'（未计入暗影兽/守卫，留意追逐）':''}`);draw();}else notify('当前没有无伤路线，试试重新探索本关。');});
+$('helpButton').addEventListener('click',()=>$('helpDialog').showModal());
+$('closeHelp').addEventListener('click',()=>$('helpDialog').close());$('startButton').addEventListener('click',()=>$('helpDialog').close());
+$('helpDialog').addEventListener('click',e=>{if(e.target===$('helpDialog')){const r=$('helpDialog').getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)$('helpDialog').close();}});
+document.addEventListener('keydown',event=>{
+ if($('helpDialog').open||event.ctrlKey||event.metaKey||event.altKey||['INPUT','TEXTAREA','SELECT'].includes(event.target.tagName))return;
+ const key=event.key.toLowerCase();
+ if(key==='r'){event.preventDefault();loadLevel(state.level);return;}
+ const direction={arrowup:'up',w:'up',arrowdown:'down',s:'down',arrowleft:'left',a:'left',arrowright:'right',d:'right',' ':'wait'}[key];
+ if(!direction)return;
+ if(key===' '&&event.target.closest('button'))return;
+ event.preventDefault();if(event.repeat&&performance.now()-lastKeyTime<145)return;lastKeyTime=performance.now();move(direction);
+});
+let touchStart=null;
+canvas.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse')return;touchStart={x:e.clientX,y:e.clientY,id:e.pointerId};canvas.setPointerCapture(e.pointerId);});
+canvas.addEventListener('pointerup',e=>{if(!touchStart||touchStart.id!==e.pointerId)return;const dx=e.clientX-touchStart.x,dy=e.clientY-touchStart.y;touchStart=null;if(Math.max(Math.abs(dx),Math.abs(dy))<18)return;move(Math.abs(dx)>Math.abs(dy)?(dx>0?'right':'left'):(dy>0?'down':'up'));});
+canvas.addEventListener('pointercancel',()=>{touchStart=null;});
+canvas.addEventListener('mousemove',e=>{if(!state)return;const rect=canvas.getBoundingClientRect();const sx=(e.clientX-rect.left)/rect.width*728,sy=(e.clientY-rect.top)/rect.height*504;const gx=Math.floor(sx/TILE),gy=Math.floor(sy/TILE);if(gx>=0&&gx<13&&gy>=0&&gy<9){anim.hoverX=gx;anim.hoverY=gy;}else{anim.hoverX=null;}});
+canvas.addEventListener('mouseleave',()=>{anim.hoverX=null;});
+window.addEventListener('resize',draw);
+initStars();requestAnimationFrame(animate);
+loadLevel(Math.min(store.lastLevel,unlocked()));
+</script>
+</body>
+</html>

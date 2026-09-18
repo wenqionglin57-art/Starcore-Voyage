@@ -1,0 +1,176 @@
+{
+  "passed": true,
+  "tests": [
+    {
+      "name": "初始关卡与锁定状态"
+    },
+    {
+      "name": "全部关卡可无伤三星通关",
+      "details": [
+        {
+          "level": 1,
+          "steps": 22,
+          "par": 40
+        },
+        {
+          "level": 2,
+          "steps": 24,
+          "par": 48
+        },
+        {
+          "level": 3,
+          "steps": 28,
+          "par": 64
+        },
+        {
+          "level": 4,
+          "steps": 34,
+          "par": 68
+        },
+        {
+          "level": 5,
+          "steps": 28,
+          "par": 76
+        }
+      ]
+    },
+    {
+      "name": "真实键盘移动"
+    },
+    {
+      "name": "重开本关与撞墙不计步"
+    },
+    {
+      "name": "未收集完整时出口保持锁定"
+    },
+    {
+      "name": "无伤航线提示不增加步数"
+    },
+    {
+      "name": "玩法弹窗与输入隔离"
+    },
+    {
+      "name": "实际输入通关第 1 关",
+      "details": {
+        "won": true,
+        "hp": 3,
+        "moves": 22,
+        "stars": 3,
+        "overlay": true,
+        "unlocked": 1
+      }
+    },
+    {
+      "name": "实际输入通关第 2 关",
+      "details": {
+        "won": true,
+        "hp": 3,
+        "moves": 24,
+        "stars": 3,
+        "overlay": true,
+        "unlocked": 2
+      }
+    },
+    {
+      "name": "实际输入通关第 3 关",
+      "details": {
+        "won": true,
+        "hp": 3,
+        "moves": 28,
+        "stars": 3,
+        "overlay": true,
+        "unlocked": 3
+      }
+    },
+    {
+      "name": "实际输入通关第 4 关",
+      "details": {
+        "won": true,
+        "hp": 3,
+        "moves": 34,
+        "stars": 3,
+        "overlay": true,
+        "unlocked": 4
+      }
+    },
+    {
+      "name": "实际输入通关第 5 关",
+      "details": {
+        "won": true,
+        "hp": 3,
+        "moves": 28,
+        "stars": 3,
+        "overlay": true,
+        "unlocked": 4
+      }
+    },
+    {
+      "name": "全通关与返回起点"
+    },
+    {
+      "name": "刷新后通关纪录保留"
+    },
+    {
+      "name": "激光节奏、护盾扣减、失败与重试"
+    },
+    {
+      "name": "关卡选择、方向按钮与等待按钮"
+    },
+    {
+      "name": "桌面布局无水平溢出",
+      "details": {
+        "width": 1440,
+        "scrollWidth": 1425,
+        "canvasWidth": 822,
+        "height": 1240
+      }
+    },
+    {
+      "name": "手机布局无水平溢出",
+      "details": {
+        "width": 390,
+        "scrollWidth": 390,
+        "canvasWidth": 322,
+        "buttons": [
+          {
+            "w": 35,
+            "h": 35
+          },
+          {
+            "w": 35,
+            "h": 35
+          },
+          {
+            "w": 35,
+            "h": 35
+          },
+          {
+            "w": 35,
+            "h": 35
+          }
+        ]
+      }
+    },
+    {
+      "name": "手机真实触摸滑动方向识别"
+    },
+    {
+      "name": "手机通关弹层按钮完整可见",
+      "details": {
+        "overlayBottom": 602.015625,
+        "nextBottom": 550.546875,
+        "nextTop": 517.546875,
+        "overlayTop": 369.09375
+      }
+    },
+    {
+      "name": "320像素窄屏无水平溢出"
+    },
+    {
+      "name": "浏览器无脚本异常"
+    },
+    {
+      "name": "存储被禁用仍可游玩并显示说明"
+    }
+  ]
+}
