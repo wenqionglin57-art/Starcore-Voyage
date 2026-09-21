@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0b1015">
-<meta name="description" content="星核迷航：一个可离线游玩的十关迷宫小游戏。收集星核，避开激光，找到出口。">
+<meta name="description" content="星核迷航：一个可离线游玩的十五关迷宫小游戏。收集星核，避开激光与暗影兽，击溃暗核守卫，点亮出口。">
 <title>星核迷航 · 再向未知走一步</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='13' fill='%23c6f785'/%3E%3Cpath d='M13 33V14h22v19H23V24h5' fill='none' stroke='%23111b19' stroke-width='4'/%3E%3C/svg%3E">
 <style>
@@ -19,6 +19,12 @@
 @media(max-width:900px){.site-header{height:73px}.page{padding-top:27px}.hero h1{font-size:32px}.game-layout{grid-template-columns:minmax(0,1fr) 229px;gap:14px}.levels{gap:8px}.level-tab{gap:8px;padding:13px 10px}.level-desc{font-size:8px;letter-spacing:0}.level-name{font-size:11px}.level-num{font-size:16px}.level-lock{display:none}.board-header{padding:15px}.board-title{gap:7px}.board-title h2{font-size:12px}.canvas-stage{margin:12px 11px 0;padding:6px}.legend{gap:15px;font-size:9px;margin:15px}.board-footer{align-items:flex-start;gap:8px;padding:12px 14px}.board-footer p{font-size:10px}.hint-button{font-size:10px}.card{padding:16px}.card-heading{margin-bottom:16px}.explorer{margin-bottom:16px}.shield-row{margin-bottom:17px}.control-body{gap:10px}.dpad{grid-template-columns:repeat(3,31px);grid-template-rows:repeat(2,30px)}.journey{padding-right:0}.hero p{letter-spacing:0}.sidebar{gap:12px}.stat-value{font-size:26px}}
 @media(max-width:700px){.site-header{margin:0 20px;height:72px}.brand-name{font-size:15px}.brand-name small{font-size:8px}.header-actions{gap:10px}.small-status{display:none}.ghost-button{padding:9px 10px;font-size:11px}.page{margin:0 16px;padding-top:24px}.hero{margin-bottom:23px;align-items:flex-end}.hero h1{font-size:31px;letter-spacing:3px}.hero h1 span{font-size:10px;margin-left:6px;padding:4px 7px;letter-spacing:0}.hero p{font-size:11px;margin-top:7px;max-width:235px;line-height:1.8}.journey{border:0;padding:0 0 6px 10px;gap:0}.journey-copy{display:none}.journey-ring,.journey-ring svg{width:43px;height:43px}.journey-ring span{font-size:13px}.eyebrow{font-size:8px;gap:8px}.levels{gap:6px;margin-bottom:15px}.level-tab{flex-direction:column;align-items:flex-start;gap:7px;padding:11px 9px;min-height:76px;border-radius:8px}.level-name{font-size:10px;margin-bottom:0;letter-spacing:0}.level-num{font-size:16px}.level-desc{display:none}.level-tab.current:after{right:10px;top:15px;width:4px;height:4px}.game-layout{display:flex;flex-direction:column;gap:14px}.game-panel{width:100%;border-radius:11px}.board-header{padding:13px 15px;min-height:53px}.board-state{font-size:9px}.sector-tag{font-size:8px}.board-title h2{font-size:12px}.canvas-stage{margin:11px 11px 0;padding:5px}.legend{margin:15px;gap:20px;font-size:9px}.board-footer{padding:12px 14px}.sidebar{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;align-items:stretch}.profile-card{grid-column:1;grid-row:1}.mission{grid-column:1;grid-row:2}.controls-card{grid-column:2;grid-row:1 / span 2;display:flex;flex-direction:column;justify-content:center}.card{padding:16px}.card-heading{margin-bottom:16px}.explorer{display:none}.shield-row{margin-bottom:15px;font-size:10px}.stats{padding-top:13px}.stat+.stat{padding-left:13px}.stat-value{font-size:27px}.stat-value small{font-size:12px}.stat-label{font-size:9px}.micro-label{font-size:8px}.card-heading h3{font-size:11px}.hearts{gap:4px}.heart{width:15px;height:15px}.mission-label{font-size:11px;margin-bottom:9px}.objective{font-size:10px}.core-progress{margin:12px 0 9px}.mission-note{font-size:9px;flex-wrap:wrap;gap:4px}.control-top{flex-direction:column;gap:8px;margin-bottom:18px;font-size:12px}.control-body{flex-direction:column;gap:15px}.dpad{grid-template-columns:repeat(3,35px);grid-template-rows:repeat(2,35px);gap:5px}.wait-button{min-width:95px}.wait-note{margin-top:7px}.sidebar>.restart-button{grid-column:1 / -1;min-height:44px}.bottom-strip{font-size:9px;padding:18px 0;gap:12px;line-height:1.8;align-items:flex-start}.bottom-strip span{align-items:flex-start;gap:5px}.bottom-strip span:last-child{text-align:right;display:block}.bottom-strip svg{margin-top:2px}.page-footer{font-size:8px;padding-top:18px;padding-bottom:7px;letter-spacing:.7px}.overlay{padding:14px}.result-symbol{display:none}.result h2{font-size:20px;margin:7px 0}.result p{font-size:10px;margin:6px 0;line-height:1.6}.result-label{font-size:8px}.result-stars{margin:8px 0;gap:10px}.result-stars svg{width:20px;height:20px}.result .primary{padding:9px;font-size:11px;margin-top:5px}.result .secondary{margin-top:5px;font-size:10px;padding:3px 12px}.result{max-width:270px}}
 @media(max-width:370px){.hero h1{font-size:27px}.hero h1 span{display:none}.journey{display:none}.legend{gap:14px}.card{padding:12px}.dpad{grid-template-columns:repeat(3,31px)}.board-footer p{max-width:200px}.hero p{max-width:100%}}
+.level-stars{margin-left:auto;color:var(--gold);font-size:11px;letter-spacing:1px;line-height:1;flex:none}
+.ghost-button.icon-only{padding:10px 11px;color:#9fb0bb}
+.ghost-button.icon-only[aria-pressed="false"]{color:#6b7a85}
+.board-footer{flex-wrap:wrap}
+.footer-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.footer-actions .hint-button[aria-pressed="true"]{border-color:#9fbe70;color:var(--mint);background:#1a251d}
 </style>
 </head>
 <body>
@@ -44,16 +50,20 @@
 <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4 3 7 7 9 4-2 7-5 7-9V6Z"/><path d="M9 12l2 2 4-4"/></symbol>
 <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></symbol>
 <symbol id="i-boots" viewBox="0 0 24 24"><path d="M7 3h4v9c0 2 1 3 3 3h3v5H5v-4l2-2V3Z"/></symbol>
+<symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 9v6h3l5 4V5L7 9H4Z"/><path d="M16 9.5a4 4 0 0 1 0 5M19 7a7.5 7.5 0 0 1 0 10"/></symbol>
+<symbol id="i-mute" viewBox="0 0 24 24"><path d="M4 9v6h3l5 4V5L7 9H4Z"/><path d="m15.5 9.5 5 5m0-5-5 5"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M8.5 5.5v13l9.5-6.5Z"/></symbol>
+<symbol id="i-stop" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="2"/></symbol>
 </defs></svg>
-<header class="site-header"><div class="brand"><span class="brand-mark"><svg class="icon"><use href="#i-maze"/></svg></span><div class="brand-name">一格宇宙<small>ONE GRID STUDIO</small></div></div><div class="header-actions"><span class="small-status"><i class="status-dot"></i> 单人探索 · 离线可玩</span><button class="ghost-button" id="helpButton"><svg class="icon"><use href="#i-help"/></svg>玩法指南</button></div></header>
+<header class="site-header"><div class="brand"><span class="brand-mark"><svg class="icon"><use href="#i-maze"/></svg></span><div class="brand-name">一格宇宙<small>ONE GRID STUDIO</small></div></div><div class="header-actions"><span class="small-status"><i class="status-dot"></i> 单人探索 · 离线可玩</span><button class="ghost-button icon-only" id="soundButton" aria-pressed="true" aria-label="音效：开" title="音效开关"><svg class="icon"><use id="soundIcon" href="#i-sound"/></svg></button><button class="ghost-button" id="helpButton"><svg class="icon"><use href="#i-help"/></svg>玩法指南</button></div></header>
 <main class="page">
-<section class="hero"><div><div class="eyebrow"><span>THE MINI ARCADE</span><b>/</b><span>益智冒险 · NO. 001</span></div><h1>星核迷航<span>步步有解</span></h1><p>收集微光，穿过迷宫。再向未知走一步。</p></div><div class="journey"><div class="journey-ring"><svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="24" fill="none" stroke="#2a3631" stroke-width="3"/><circle id="journeyCircle" cx="28" cy="28" r="24" fill="none" stroke="#c6f785" stroke-width="3" stroke-linecap="round" stroke-dasharray="150.8" stroke-dashoffset="150.8"/></svg><span id="journeyCount">0/5</span></div><div class="journey-copy"><strong>你的探索旅程</strong><small id="journeyText">五个星区，等你点亮</small></div></div></section>
+<section class="hero"><div><div class="eyebrow"><span>THE MINI ARCADE</span><b>/</b><span>益智冒险 · NO. 001</span></div><h1>星核迷航<span>步步有解</span></h1><p>收集微光，穿过迷宫。再向未知走一步。</p></div><div class="journey"><div class="journey-ring"><svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="24" fill="none" stroke="#2a3631" stroke-width="3"/><circle id="journeyCircle" cx="28" cy="28" r="24" fill="none" stroke="#c6f785" stroke-width="3" stroke-linecap="round" stroke-dasharray="150.8" stroke-dashoffset="150.8"/></svg><span id="journeyCount">0/15</span></div><div class="journey-copy"><strong>你的探索旅程</strong><small id="journeyText">15 个星区，等你点亮</small></div></div></section>
 <nav class="levels" id="levelTabs" aria-label="选择关卡"></nav>
 <div class="game-layout">
 <section class="game-panel" aria-label="游戏区域"><div class="board-header"><div class="board-title"><span class="sector-tag" id="sectorTag">SECTOR 01</span><h2 id="levelTitle">初次着陆</h2></div><div class="board-state"><i></i><span id="boardState">准备就绪</span></div></div>
 <div class="canvas-stage"><canvas id="game" width="728" height="504" tabindex="0" aria-label="迷宫棋盘，使用方向键或WASD移动。收集全部星核后走到出口。">请使用支持 Canvas 的现代浏览器游玩。也可使用右侧方向按钮。</canvas><div class="overlay" id="resultOverlay" hidden><div class="result"><div class="result-symbol"><svg class="icon"><use id="resultIcon" href="#i-flag"/></svg></div><div class="result-label" id="resultLabel">SECTOR COMPLETE</div><h2 id="resultTitle">星区探索完成</h2><div class="result-stars" id="resultStars" aria-label="三星"></div><p id="resultText"></p><button class="primary" id="nextButton">前往下一星区 →</button><button class="secondary" id="replayButton">再试一次，刷新纪录</button></div></div></div>
 <div class="legend"><span><i class="legend-player"></i>探索者</span><span><i class="legend-core"></i>星核</span><span><i class="legend-exit"></i>出口</span><span><i class="legend-trap"></i>激光</span><span><i class="legend-shield"></i>护盾补给</span><span><i class="legend-freeze"></i>冻结钟</span><span><i class="legend-boots"></i>闪现靴</span><span><i class="legend-monster"></i>暗影兽</span><span><i class="legend-boss"></i>暗核守卫</span><span class="coordinate" id="coordinate">X:01 / Y:01</span></div>
-<div class="board-footer"><p id="levelTip"><b>探索提示</b> 不必着急，这里没有倒计时。</p><button class="hint-button" id="hintButton"><svg class="icon"><use href="#i-bulb"/></svg>航线提示</button></div></section>
+<div class="board-footer"><p id="levelTip"><b>探索提示</b> 不必着急，这里没有倒计时。</p><div class="footer-actions"><button class="hint-button" id="demoButton" aria-pressed="false" title="播放一条无伤通关路线（不计入纪录）"><svg class="icon"><use id="demoIcon" href="#i-play"/></svg><span id="demoLabel">演示解法</span></button><button class="hint-button" id="hintButton"><svg class="icon"><use href="#i-bulb"/></svg>航线提示</button></div></div></section>
 <aside class="sidebar" aria-label="探索状态与操作">
 <section class="card profile-card"><div class="card-heading"><h3>探索者档案</h3><span class="micro-label">PLAYER 01</span></div><div class="explorer"><div class="avatar"><svg class="icon"><use href="#i-robot"/></svg></div><div class="explorer-name"><strong>小小探索者</strong><span><i></i>已连接 · 信号良好</span></div></div><div class="shield-row"><span>剩余护盾</span><div class="hearts" id="hearts" role="img" aria-label="3格护盾"></div></div><div class="stats"><div class="stat"><div class="stat-label">探索步数</div><div class="stat-value" id="moveCount">00</div></div><div class="stat"><div class="stat-label">已收集星核</div><div class="stat-value core"><span id="coreCount">0</span><small id="coreTotal">/ 3</small></div></div></div></section>
 <section class="card mission"><div class="mission-label"><svg class="icon"><use href="#i-target"/></svg>当前任务</div><div class="objective" id="objective">收集全部 <span>3 枚星核</span><br>点亮出口，前往下一星区。</div><div class="core-progress" role="progressbar" id="coreProgress" aria-label="星核收集进度" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0"><div id="coreBar"></div></div><div class="mission-note"><span id="exitNote">出口尚未激活</span><span id="parNote">三星 ≤ 40 步</span></div><div class="trap-phase" id="trapPhase" hidden></div><div class="effects-row" id="effectsRow" hidden></div><div class="trap-phase" id="bossRow" hidden></div></section>
@@ -63,8 +73,8 @@
 <div class="bottom-strip"><span><svg class="icon"><use href="#i-save"/></svg><span id="saveNote">通关记录自动保存在此浏览器，无需登录。</span></span><span>小提示：<b>满护盾 + 目标步数内通关</b>，即可获得三星。</span></div>
 <footer class="page-footer"><span>ONE GRID. ENDLESS CURIOSITY.</span><span>15 个星区 · 随时出发</span></footer>
 </main>
-<dialog id="helpDialog" aria-labelledby="helpTitle"><button class="close" id="closeHelp" aria-label="关闭玩法指南"><svg class="icon"><use href="#i-close"/></svg></button><span class="eyebrow">EXPLORER'S HANDBOOK</span><h2 id="helpTitle">每一步，都算数。</h2><ol><li>用 <strong>方向键 / WASD</strong> 移动，或点击方向按钮。手机上也可在棋盘滑动。</li><li>收集所有<strong>金色星核</strong>后，走进亮起的<strong>绿色出口</strong>，即可解锁下一关。</li><li>第 2 关起出现激光。激光每 <strong>2 步</strong>切换开关；每次移动或等待，<strong>先切换，再检查脚下</strong>。踩中开启的激光会损失 1 格护盾。</li><li>第 11 关起出现<strong>暗影兽</strong>：你每走一步，它就追一步。被它抓住会扣 1 护盾，随后它退回巢穴，给你喘息之机。</li>
-<li>第 14 关起出现<strong>暗核守卫</strong>（BOSS）：血量 3 格，会追击你。引它踩中<strong>开启的激光</strong>可让它掉血，三次击溃即可打通通道。撞上它会扣 1 护盾，它退回原点并陷入晕眩 2 回合。</li><li>关卡中散落道具：<strong>护盾补给</strong>恢复 1 格护盾；<strong>冻结钟</strong>让暗影兽静止 4 步；<strong>闪现靴</strong>让你接下来 2 步免疫激光。</li><li>用 <kbd>空格</kbd> 原地等待机关关闭，或点击<strong>航线提示</strong>获取下一步建议。护盾归零后可无限重试。</li></ol><div class="help-detail">撞墙不计步。站在开启的激光上等待同样会受伤。<br>满护盾且在目标步数内通关获三星；至少 2 格护盾获二星；其余成功通关获一星。<br><kbd>R</kbd> 重开当前关卡。关卡与最佳纪录保存在当前浏览器；浏览器限制存储时，仍可正常游玩。</div><button class="primary" id="startButton">明白了，出发 →</button></dialog>
+<dialog id="helpDialog" aria-labelledby="helpTitle"><button class="close" id="closeHelp" aria-label="关闭玩法指南"><svg class="icon"><use href="#i-close"/></svg></button><span class="eyebrow">EXPLORER'S HANDBOOK</span><h2 id="helpTitle">每一步，都算数。</h2><ol><li>用 <strong>方向键 / WASD</strong> 移动，或点击方向按钮。手机上也可在棋盘滑动。</li><li>收集所有<strong>金色星核</strong>后，走进亮起的<strong>绿色出口</strong>，即可解锁下一关。</li><li>第 2 关起出现激光。激光每 <strong>2 步</strong>切换开关，且<strong>开局就是开启状态</strong>（所以第一步要格外小心）。踩中开启的激光会损失 1 格护盾，可原地等待让它关掉。</li><li>第 11 关起出现<strong>暗影兽</strong>：你每走一步，它就追一步。被它抓住会扣 1 护盾，随后它退回巢穴，给你喘息之机。</li>
+<li>第 14 关起出现<strong>暗核守卫</strong>（BOSS）：血量 3 格，会追击你。引它踩中<strong>开启的激光</strong>可让它掉血，三次击溃即可打通通道。撞上它会扣 1 护盾，它退回原点并陷入晕眩 2 回合。</li><li>关卡中散落道具：<strong>护盾补给</strong>恢复 1 格护盾；<strong>冻结钟</strong>让暗影兽静止 4 步；<strong>闪现靴</strong>让你接下来 2 步免疫激光。</li><li>用 <kbd>空格</kbd> 原地等待机关关闭，或点击<strong>航线提示</strong>获取下一步建议。护盾归零后可无限重试。</li></ol><div class="help-detail">撞墙不计步。站在开启的激光上等待同样会受伤。<br>满护盾且在目标步数内通关获三星；至少 2 格护盾获二星；其余成功通关获一星。<br><kbd>R</kbd> 重开当前关卡。关卡与最佳纪录保存在当前浏览器；浏览器限制存储时，仍可正常游玩。<br>点「演示解法」可观摩一条无伤通关路线，仅作参考，不计入纪录。</div><button class="primary" id="startButton">明白了，出发 →</button></dialog>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <script>
 'use strict';
@@ -186,13 +196,13 @@ const LEVELS = [
  '#...........#',
  '#############']},
 
- {name:'失控回路',subtitle:'ROGUE CIRCUIT',par:78,tip:'两只暗影兽在回路中游荡，护盾补给能多撑一次。',map:[
+ {name:'失控回路',subtitle:'ROGUE CIRCUIT',par:58,tip:'两只暗影兽在回路中游荡，利用环形通道拉开距离。',map:[
  '#############',
  '#S.^.*.^.*.E#',
  '#...........#',
  '#.#####.#####',
  '#.H.M...F.M.#',
- '#####.###.###',
+ '##.##.###.###',
  '#.*.........#',
  '#..^.^...^.^#',
  '#############']},
@@ -208,7 +218,7 @@ const LEVELS = [
  '#.^.*.^.^.*.#',
  '#############']},
 
- {name:'暗核守卫',subtitle:'CORE WARDEN',par:80,tip:'暗核守卫血量更厚，引它踩中激活的激光三次即可击溃。',map:[
+ {name:'暗核守卫',subtitle:'CORE WARDEN',par:80,tip:'暗核守卫会紧追不舍，引它踩中激活的激光三次即可击溃。',map:[
  '#############',
  '#S....*....E#',
  '#.#.#.#.#.#.#',
@@ -246,26 +256,72 @@ try {
   if(Number.isInteger(raw.lastLevel)) store.lastLevel=Math.max(0,Math.min(LEVELS.length-1,raw.lastLevel));
  }
 } catch (_) {storageAvailable=false;}
-let state, toastTimer, hintDirection=null, lastKeyTime=0;
+let state, toastTimer, pendingNotice=null, hintDirection=null, lastKeyTime=0;
+// 演示解法：自动播放一条“不受伤”的通关路线，仅用于观摩，不计入任何纪录。
+let demo={timer:null,active:false,route:[]};
+// 尊重系统的“减少动态效果”偏好：冻结背景星尘与角色缓动，避免不适与多余耗电。
+let reduceMotion=false;try{reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;}catch(_){}
+// ============================================================================
+// 音效：用 Web Audio 现场合成，不依赖任何音频文件，依然完全离线。
+// 浏览器不允许（无音频设备 / 自动播放限制）时静默降级，绝不影响玩法。
+// ============================================================================
+const SOUND_KEY='one-grid-starquest-sound';
+let soundOn=true;
+try{soundOn=localStorage.getItem(SOUND_KEY)!=='off';}catch(_){}
+let audioCtx=null;
+function audio(){if(audioCtx!==null)return audioCtx;try{const Ctor=window.AudioContext||window.webkitAudioContext;audioCtx=Ctor?new Ctor():false;}catch(_){audioCtx=false;}return audioCtx;}
+function tone(freq,options){
+ const ctx=audio();if(!ctx)return;
+ const opt=options||{},at=opt.at||0,dur=opt.dur||0.12,type=opt.type||'sine',vol=opt.vol||0.4,to=opt.to||0;
+ const t0=ctx.currentTime+at,osc=ctx.createOscillator(),gain=ctx.createGain();
+ osc.type=type;osc.frequency.setValueAtTime(freq,t0);
+ if(to)osc.frequency.exponentialRampToValueAtTime(Math.max(1,to),t0+dur);
+ gain.gain.setValueAtTime(0.0001,t0);
+ gain.gain.exponentialRampToValueAtTime(vol,t0+0.012);
+ gain.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
+ osc.connect(gain);gain.connect(ctx.destination);
+ osc.start(t0);osc.stop(t0+dur+0.02);
+}
+function sfx(name){
+ if(!soundOn)return;
+ const ctx=audio();if(!ctx)return;
+ if(ctx.state!=='running'){if(ctx.resume){const p=ctx.resume();if(p&&p.catch)p.catch(()=>{});}return;}
+ if(name==='core'){tone(880,{dur:0.09,type:'triangle',vol:0.5,to:1320});tone(1320,{at:0.05,dur:0.1,type:'sine',vol:0.28});}
+ else if(name==='shield'){tone(520,{dur:0.14,vol:0.5});tone(780,{at:0.06,dur:0.16,vol:0.36});}
+ else if(name==='freeze'){tone(1200,{dur:0.2,vol:0.32,to:560});}
+ else if(name==='boots'){tone(400,{dur:0.16,type:'square',vol:0.2,to:900});}
+ else if(name==='hurt'){tone(190,{dur:0.2,type:'sawtooth',vol:0.32,to:70});}
+ else if(name==='catch'){tone(140,{dur:0.26,type:'square',vol:0.28,to:58});}
+ else if(name==='boss'){tone(300,{dur:0.18,type:'square',vol:0.28,to:880});tone(900,{at:0.08,dur:0.16,type:'triangle',vol:0.26,to:220});}
+ else if(name==='blocked'){tone(165,{dur:0.06,type:'square',vol:0.14});}
+ else if(name==='win'){[660,880,1320].forEach((f,i)=>tone(f,{at:i*0.09,dur:0.18,type:'triangle',vol:0.4}));}
+ else if(name==='lose'){[400,260].forEach((f,i)=>tone(f,{at:i*0.13,dur:0.24,vol:0.3}));}
+}
+function updateSoundButton(){
+ $('soundIcon').setAttribute('href',soundOn?'#i-sound':'#i-mute');
+ $('soundButton').setAttribute('aria-pressed',String(soundOn));
+ $('soundButton').setAttribute('aria-label','音效：'+(soundOn?'开':'关'));
+}
 let anim={stars:[],particles:[],shake:0,time:0,playerRX:0,playerRY:0,hoverX:null,hoverY:null};
 let staticCanvas=null,staticCtx=null,staticDpr=0,bgGradient=null;
 function initStars(){anim.stars=[];for(let i=0;i<70;i++)anim.stars.push({x:Math.random()*728,y:Math.random()*504,r:Math.random()*1.4+0.3,s:Math.random()*0.25+0.05,tw:Math.random()*6.28,hue:Math.random()<0.2?'#c6f785':Math.random()<0.5?'#78d9c2':'#e8f0f5'});}
 function spawnBurst(x,y,color){for(let i=0;i<14;i++){const a=Math.random()*6.28,sp=Math.random()*2.5+0.6;anim.particles.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,life:1,color,r:Math.random()*2+1});}}
 function addShake(n){anim.shake=Math.min(anim.shake+n,10);}
-function animate(time){if(!state){requestAnimationFrame(animate);return;}anim.time=time/1000;anim.playerRX+=(state.x-anim.playerRX)*0.28;anim.playerRY+=(state.y-anim.playerRY)*0.28;anim.shake*=0.85;anim.particles=anim.particles.filter(p=>{p.x+=p.vx;p.y+=p.vy;p.vx*=0.96;p.vy*=0.96;p.vy+=0.04;p.life-=0.03;return p.life>0;});draw();requestAnimationFrame(animate);}
+function animate(time){if(!state){requestAnimationFrame(animate);return;}if(!reduceMotion)anim.time=time/1000;anim.playerRX=reduceMotion?state.x:anim.playerRX+(state.x-anim.playerRX)*0.28;anim.playerRY=reduceMotion?state.y:anim.playerRY+(state.y-anim.playerRY)*0.28;anim.shake*=reduceMotion?0:0.85;if(reduceMotion)anim.particles.length=0;else anim.particles=anim.particles.filter(p=>{p.x+=p.vx;p.y+=p.vy;p.vx*=0.96;p.vy*=0.96;p.vy+=0.04;p.life-=0.03;return p.life>0;});draw();requestAnimationFrame(animate);}
 function drawNebula(W,H){[{x:W*0.2,y:H*0.3,c:'rgba(178,160,237,0.10)'},{x:W*0.8,y:H*0.7,c:'rgba(120,217,194,0.08)'},{x:W*0.5,y:H*0.5,c:'rgba(198,247,133,0.06)'}].forEach(b=>{const r=140+Math.sin(anim.time*0.3)*20;const g=ctx.createRadialGradient(b.x,b.y,0,b.x,b.y,r);g.addColorStop(0,b.c);g.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.fillRect(b.x-r,b.y-r,r*2,r*2);});}
-function drawStars(W,H){anim.stars.forEach(s=>{s.x-=s.s;if(s.x<0)s.x=W;const tw=0.4+0.6*Math.abs(Math.sin(anim.time*s.s*4+s.tw));ctx.globalAlpha=tw;ctx.fillStyle=s.hue;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill();});ctx.globalAlpha=1;}
+function drawStars(W,H){anim.stars.forEach(s=>{if(!reduceMotion){s.x-=s.s;if(s.x<0)s.x=W;}const tw=reduceMotion?0.7:0.4+0.6*Math.abs(Math.sin(anim.time*s.s*4+s.tw));ctx.globalAlpha=tw;ctx.fillStyle=s.hue;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill();});ctx.globalAlpha=1;}
 function icon(name,extra=''){return `<svg class="icon ${extra}" aria-hidden="true"><use href="#i-${name}"/></svg>`;}
 function unlocked(){let i=0;while(i<LEVELS.length-1 && store.records[i]) i++;return i;}
 function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(store));}catch(_){storageAvailable=false;}if(!storageAvailable)$('saveNote').textContent='当前浏览器未允许存储，进度仅保留到本页关闭。';}
-function notify(text){clearTimeout(toastTimer);$('toast').textContent=text;$('toast').hidden=false;toastTimer=setTimeout(()=>{$('toast').hidden=true;},3400);}
+function notify(text,force){if(demo.active&&!force)return;clearTimeout(toastTimer);clearTimeout(pendingNotice);pendingNotice=null;$('toast').textContent=text;$('toast').hidden=false;toastTimer=setTimeout(()=>{$('toast').hidden=true;},3400);}
 function parseMap(level){const cores=[],traps=[],items=[],monsters=[],bosses=[];let start,exit;level.map.forEach((row,y)=>[...row].forEach((c,x)=>{if(c==='S')start={x,y};else if(c==='E')exit={x,y};else if(c==='*')cores.push({x,y});else if(c==='^')traps.push({x,y});else if(c==='H'||c==='F'||c==='B')items.push({x,y,type:c});else if(c==='M')monsters.push({x,y,spawnX:x,spawnY:y,frozen:0});else if(c==='@')bosses.push({x,y,spawnX:x,spawnY:y,hp:3,stunned:0});}));return {cores,traps,items,monsters,bosses,start,exit};}
 function loadLevel(index){
  if(index<0 || index>unlocked() || index>=LEVELS.length)return;
+ stopDemo();
  const info=parseMap(LEVELS[index]);
  state={level:index,x:info.start.x,y:info.start.y,moves:0,hp:3,mask:0,cores:info.cores,traps:info.traps,items:info.items,monsters:info.monsters,bosses:info.bosses,exit:info.exit,over:false,won:false,freezeTurns:0,bootsTurns:0};
- hintDirection=null;store.lastLevel=index;save();$('resultOverlay').hidden=true;clearTimeout(toastTimer);$('toast').hidden=true;
- if(info.bosses && info.bosses.length)setTimeout(()=>notify('警告：暗核守卫出现！引它踩中激活的激光，三次击溃。'),420);
+ hintDirection=null;store.lastLevel=index;save();$('resultOverlay').hidden=true;clearTimeout(toastTimer);clearTimeout(pendingNotice);pendingNotice=null;$('toast').hidden=true;
+ if(info.bosses && info.bosses.length)pendingNotice=setTimeout(()=>{pendingNotice=null;notify('警告：暗核守卫出现！引它踩中激活的激光，三次击溃。');},420);
  anim.playerRX=info.start.x;anim.playerRY=info.start.y;anim.particles=[];anim.shake=0;anim.hoverX=null;anim.hoverY=null;
  renderStatic();
  $('sectorTag').textContent=`SECTOR ${String(index+1).padStart(2,'0')}`;$('levelTitle').textContent=LEVELS[index].name;
@@ -277,10 +333,12 @@ function loadLevel(index){
 function renderTabs(){
  const max=unlocked();$('levelTabs').innerHTML=LEVELS.map((l,i)=>{
   const r=store.records[i];const isLocked=i>max;
-  return `<button class="level-tab ${i===state.level?'current ':''}${r?'done':''}" data-level="${i}" ${isLocked?'disabled':''} ${i===state.level?'aria-current="step"':''} aria-label="第${i+1}关 ${l.name}${isLocked?'，尚未解锁':r?'，已通关，'+r.stars+'星':'，可挑战'}"><span class="level-num">${String(i+1).padStart(2,'0')}</span><span><span class="level-name">${l.name}</span><span class="level-desc">${r?'BEST '+r.moves+' STEPS':l.subtitle}</span></span>${isLocked?icon('lock','level-lock'):r?icon('check','level-lock'):''}</button>`;
+  const badge=isLocked?icon('lock','level-lock'):r?`<span class="level-stars" aria-hidden="true">${'★'.repeat(r.stars)}</span>`:'';
+  return `<button class="level-tab ${i===state.level?'current ':''}${r?'done':''}" data-level="${i}" ${isLocked?'disabled':''} ${i===state.level?'aria-current="step"':''} aria-label="第${i+1}关 ${l.name}${isLocked?'，尚未解锁':r?'，已通关，'+r.stars+'星':'，可挑战'}"><span class="level-num">${String(i+1).padStart(2,'0')}</span><span><span class="level-name">${l.name}</span><span class="level-desc">${r?'BEST '+r.moves+' STEPS':l.subtitle}</span></span>${badge}</button>`;
  }).join('');
- const count=Object.keys(store.records).length;$('journeyCount').textContent=count+'/'+LEVELS.length;$('journeyCircle').setAttribute('stroke-dashoffset',150.8*(1-count/LEVELS.length));
- $('journeyText').textContent=count===LEVELS.length?'全部星区已被你点亮':count?`已点亮 ${count} 个星区，继续出发`:`${LEVELS.length} 个星区，等你点亮`;
+ const count=Object.keys(store.records).length,total=Object.values(store.records).reduce((sum,r)=>sum+r.stars,0),full=LEVELS.length*3;
+ $('journeyCount').textContent=count+'/'+LEVELS.length;$('journeyCircle').setAttribute('stroke-dashoffset',150.8*(1-count/LEVELS.length));
+ $('journeyText').textContent=total===full?`全部星区三星达成 · ★${full}`:count===LEVELS.length?`全部星区已被你点亮 · ★${total}/${full}`:count?`已点亮 ${count} 个星区 · ★${total}/${full}`:`${LEVELS.length} 个星区，等你点亮`;
 }
 function popcount(mask){let n=0;while(mask){n+=mask&1;mask>>=1;}return n;}
 function laserActive(moves){return Math.floor(moves/2)%2===0;}
@@ -306,110 +364,147 @@ function updateUI(){
  if(state.bootsTurns>0)chips.push(`<span class="effect-chip boots">${icon('boots')}闪现 <b>${state.bootsTurns}</b></span>`);
  if(chips.length){eff.hidden=false;eff.innerHTML=chips.join('');}else eff.hidden=true;
  canvas.setAttribute('aria-label',`第${state.level+1}关，探索者在第${state.y+1}行第${state.x+1}列，${state.hp}格护盾，已收集${collected}/${state.cores.length}枚星核，${state.moves}步。`);
- document.querySelectorAll('[data-move],#waitButton,#hintButton').forEach(b=>b.disabled=state.over);
+ document.querySelectorAll('[data-move],#waitButton,#hintButton').forEach(b=>b.disabled=state.over||demo.active);
 }
-function move(direction){
- if(!state || state.over || $('helpDialog').open)return;
- const delta=DIRS[direction];if(!delta)return;
- const nx=state.x+delta[0],ny=state.y+delta[1],tile=LEVELS[state.level].map[ny]?.[nx];
- if(!tile || tile==='#'){notify('前方是墙壁，试试另一条路。');return;}
- state.x=nx;state.y=ny;state.moves++;hintDirection=null;
+// ============================================================================
+// 纯逻辑核心：step() 只依赖传入的 state，返回新的 state 与事件列表，
+// 不触碰 DOM、动画与存档。游戏操作、航线提示与自动化验证共用同一套规则。
+// ============================================================================
+function cloneState(s){
+ return {level:s.level,x:s.x,y:s.y,moves:s.moves,hp:s.hp,mask:s.mask,cores:s.cores,traps:s.traps,
+  items:s.items.map(i=>({...i})),monsters:s.monsters.map(m=>({...m})),bosses:(s.bosses||[]).map(b=>({...b})),
+  exit:s.exit,over:s.over,won:s.won,freezeTurns:s.freezeTurns,bootsTurns:s.bootsTurns};
+}
+// 从 from 沿最短路径朝 to 走一步，返回该格坐标；无路可达返回 null。
+function pathFirstStep(level,from,to){
+ const dirs=[[0,-1],[1,0],[0,1],[-1,0]],startK=from.x+','+from.y,prev=new Map([[startK,null]]),queue=[{x:from.x,y:from.y}];
+ let goalK=null;
+ while(queue.length){
+  const cur=queue.shift();
+  if(cur.x===to.x&&cur.y===to.y){goalK=cur.x+','+cur.y;break;}
+  for(const [dx,dy] of dirs){
+   const nx=cur.x+dx,ny=cur.y+dy;
+   if(nx<0||ny<0||nx>=13||ny>=9)continue;
+   if(level.map[ny][nx]==='#')continue;
+   const k=nx+','+ny;if(prev.has(k))continue;
+   prev.set(k,cur.x+','+cur.y);queue.push({x:nx,y:ny});
+  }
+ }
+ if(!goalK)return null;
+ let k=goalK;while(prev.get(k)!==startK)k=prev.get(k);
+ const parts=k.split(',');return {x:Number(parts[0]),y:Number(parts[1])};
+}
+// 暗影兽 / 暗核守卫 AI：冻结时不动；否则用 BFS 朝玩家走一步。
+// 暗影兽撞玩家：扣护盾，退回巢穴。
+// 暗核守卫撞玩家：扣护盾，退回原点 + 晕眩 2 回合；移动后若踩到激活激光则掉血，血量归零即被击溃。
+function stepMonsters(s,events){
+ // 玩家主动撞上的目标本回合已结算过伤害，这里只清除标记，避免重复扣血。
+ const settled=new Set();
+ s.monsters.forEach(m=>{if(m.settled){settled.add(m);delete m.settled;}});
+ (s.bosses||[]).forEach(b=>{if(b.settled){settled.add(b);delete b.settled;}});
+ if(!s.monsters.length && !(s.bosses&&s.bosses.length))return;
+ if(s.freezeTurns>0){s.freezeTurns--;return;}
+ const level=LEVELS[s.level];
+ s.monsters.forEach(m=>{if(m.x===s.x&&m.y===s.y)return;const next=pathFirstStep(level,m,{x:s.x,y:s.y});if(next){m.x=next.x;m.y=next.y;}});
+ s.monsters.forEach(m=>{if(!settled.has(m)&&m.x===s.x&&m.y===s.y){s.hp--;events.push({type:'damage',source:'monsterCatch',x:s.x,y:s.y});m.x=m.spawnX;m.y=m.spawnY;}});
+ if(s.bosses&&s.bosses.length){
+  s.bosses.forEach(b=>{
+   // 刚被撞退的守卫本回合不再递减晕眩，确保“晕眩 2 回合”名副其实。
+   if(b.stunned>0){if(!settled.has(b))b.stunned--;return;}
+   if(b.x===s.x&&b.y===s.y)return;
+   const next=pathFirstStep(level,b,{x:s.x,y:s.y});if(next){b.x=next.x;b.y=next.y;}
+   const tile=level.map[b.y]?.[b.x];
+   if(tile==='^'&&laserActive(s.moves)){b.hp--;events.push({type:'bossHit',x:b.x,y:b.y,hp:b.hp});}
+  });
+  s.bosses.forEach(b=>{if(!settled.has(b)&&b.hp>0&&b.x===s.x&&b.y===s.y){s.hp--;events.push({type:'damage',source:'bossCatch',x:s.x,y:s.y});b.x=b.spawnX;b.y=b.spawnY;b.stunned=2;}});
+  s.bosses=s.bosses.filter(b=>b.hp>0);
+ }
+}
+function step(s,direction){
+ const events=[],delta=DIRS[direction];
+ if(!delta)return {state:s,events,moved:false};
+ const level=LEVELS[s.level],ns=cloneState(s),nx=ns.x+delta[0],ny=ns.y+delta[1],tile=level.map[ny]?.[nx];
+ if(!tile||tile==='#'){events.push({type:'blocked'});return {state:ns,events,moved:false};}
+ ns.x=nx;ns.y=ny;ns.moves++;
  // 拾取道具（捡起后立即生效）
- state.items=state.items.filter(it=>{
+ ns.items=ns.items.filter(it=>{
   if(it.x===nx&&it.y===ny){
-   const cx=nx*TILE+TILE/2,cy=ny*TILE+TILE/2;
-   if(it.type==='H'){state.hp=Math.min(3,state.hp+1);spawnBurst(cx,cy,'#c6f785');notify('护盾补给！+1 护盾。');}
-   else if(it.type==='F'){state.freezeTurns=4;spawnBurst(cx,cy,'#8fd3ff');notify('冻结钟启动！暗影兽静止 4 步。');}
-   else if(it.type==='B'){state.bootsTurns=2;spawnBurst(cx,cy,'#f4ce7f');notify('闪现靴激活！接下来 2 步免疫激光。');}
+   events.push({type:'pickup',item:it.type,x:nx,y:ny});
+   if(it.type==='H')ns.hp=Math.min(3,ns.hp+1);
+   else if(it.type==='F')ns.freezeTurns=4;
+   else if(it.type==='B')ns.bootsTurns=2;
    return false;
   }
   return true;
  });
  // 收集星核
- state.cores.forEach((c,i)=>{if(c.x===nx&&c.y===ny&&!(state.mask&(1<<i))){state.mask|=1<<i;spawnBurst(c.x*TILE+TILE/2,c.y*TILE+TILE/2,'#f6d58c');notify(popcount(state.mask)===state.cores.length?'所有星核已集齐，绿色出口已点亮！':'收集到一枚星核，继续探索。');}});
+ ns.cores.forEach((c,i)=>{if(c.x===nx&&c.y===ny&&!(ns.mask&(1<<i))){ns.mask|=1<<i;events.push({type:'core',index:i,x:nx,y:ny});}});
  // 激光伤害（闪现靴期间免疫）
- if(tile==='^'&&laserActive(state.moves)&&state.bootsTurns<=0){state.hp--;addShake(6);notify(state.hp?'激光击中！护盾 -1，留意右侧的下步提示。':'护盾耗尽，重新出发也没关系。');}
- // 撞上暗影兽
- state.monsters.forEach(m=>{if(m.x===nx&&m.y===ny){state.hp--;addShake(8);m.x=m.spawnX;m.y=m.spawnY;notify(state.hp?'撞上暗影兽！护盾 -1，它退回巢穴。':'护盾耗尽。');}});
+ if(tile==='^'&&laserActive(ns.moves)&&ns.bootsTurns<=0){ns.hp--;events.push({type:'damage',source:'laser',x:nx,y:ny});}
+ // 撞上暗影兽（本回合不再重复结算，避免巢穴与玩家同格时二次扣血）
+ ns.monsters.forEach(m=>{if(m.x===nx&&m.y===ny){ns.hp--;events.push({type:'damage',source:'monster',x:nx,y:ny});m.x=m.spawnX;m.y=m.spawnY;m.settled=true;}});
  // 撞上暗核守卫
- state.bosses.forEach(b=>{if(b.x===nx&&b.y===ny){state.hp--;addShake(10);b.x=b.spawnX;b.y=b.spawnY;b.stunned=2;notify(state.hp?'撞上暗核守卫！护盾 -1，它退回原点并陷入晕眩。':'护盾耗尽。');}});
- if(state.hp<=0){finish(false);return;}
+ (ns.bosses||[]).forEach(b=>{if(b.x===nx&&b.y===ny){ns.hp--;events.push({type:'damage',source:'boss',x:nx,y:ny});b.x=b.spawnX;b.y=b.spawnY;b.stunned=2;b.settled=true;}});
+ if(ns.hp<=0){ns.over=true;ns.won=false;events.push({type:'lose'});return {state:ns,events,moved:true};}
  // 抵达出口（若有 BOSS 须先击溃）
  if(tile==='E'){
-  const bossAlive=state.bosses && state.bosses.length>0;
-  if(state.mask===(1<<state.cores.length)-1 && !bossAlive){finish(true);return;}
-  const need=[];const coreNeed=state.cores.length-popcount(state.mask);if(coreNeed>0)need.push(`${coreNeed} 枚星核`);if(bossAlive)need.push('击败暗核守卫');
-  notify('出口还在休眠，还需 '+need.join('、')+'。');
+  const bossAlive=ns.bosses&&ns.bosses.length>0;
+  if(ns.mask===(1<<ns.cores.length)-1&&!bossAlive){ns.over=true;ns.won=true;events.push({type:'win'});return {state:ns,events,moved:true};}
+  events.push({type:'exitLocked'});
  }
  // 闪现靴步数递减
- if(state.bootsTurns>0)state.bootsTurns--;
+ if(ns.bootsTurns>0)ns.bootsTurns--;
  // 暗影兽行动
- moveMonsters();
- if(state.hp<=0){finish(false);return;}
+ stepMonsters(ns,events);
+ if(ns.hp<=0){ns.over=true;ns.won=false;events.push({type:'lose'});return {state:ns,events,moved:true};}
+ return {state:ns,events,moved:true};
+}
+// 把纯逻辑事件翻译成提示文案与粒子动画。
+function applyEvents(events){
+ events.forEach(ev=>{
+  const cx=(ev.x==null?state.x:ev.x)*TILE+TILE/2,cy=(ev.y==null?state.y:ev.y)*TILE+TILE/2,hp=state.hp;
+  if(ev.type==='pickup'){
+   if(ev.item==='H'){spawnBurst(cx,cy,'#c6f785');sfx('shield');notify('护盾补给！+1 护盾。');}
+   else if(ev.item==='F'){spawnBurst(cx,cy,'#8fd3ff');sfx('freeze');notify('冻结钟启动！暗影兽静止 4 步。');}
+   else if(ev.item==='B'){spawnBurst(cx,cy,'#f4ce7f');sfx('boots');notify('闪现靴激活！接下来 2 步免疫激光。');}
+  }else if(ev.type==='core'){
+   spawnBurst(cx,cy,'#f6d58c');sfx('core');notify(popcount(state.mask)===state.cores.length?'所有星核已集齐，绿色出口已点亮！':'收集到一枚星核，继续探索。');
+  }else if(ev.type==='damage'){
+   addShake(ev.source==='boss'||ev.source==='bossCatch'?10:ev.source==='laser'?6:8);
+   if(ev.source==='laser'){sfx('hurt');notify(hp?'激光击中！护盾 -1，留意右侧的下步提示。':'护盾耗尽，重新出发也没关系。');}
+   else if(ev.source==='monster'){sfx('catch');notify(hp?'撞上暗影兽！护盾 -1，它退回巢穴。':'护盾耗尽。');}
+   else if(ev.source==='monsterCatch'){sfx('catch');notify(hp?'暗影兽抓住了你！护盾 -1，它退回巢穴。':'护盾耗尽，重新出发。');}
+   else if(ev.source==='boss'){sfx('hurt');notify(hp?'撞上暗核守卫！护盾 -1，它退回原点并陷入晕眩。':'护盾耗尽。');}
+   else if(ev.source==='bossCatch'){sfx('hurt');notify(hp?'暗核守卫抓住你！护盾 -1，它退回原点并陷入晕眩。':'护盾耗尽。');}
+  }else if(ev.type==='bossHit'){
+   spawnBurst(cx,cy,'#b2a0ed');addShake(6);sfx('boss');
+   if(ev.hp<=0){for(let i=0;i<26;i++){const a=Math.random()*6.28,sp=Math.random()*4+1;anim.particles.push({x:cx,y:cy,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,life:1,color:Math.random()<0.5?'#b2a0ed':'#f4ce7f',r:Math.random()*3+1.5});}addShake(10);notify('暗核守卫被激光击溃！通道已打通。');}
+   else notify(`激光命中暗核守卫！剩余 ${ev.hp} 血。`);
+  }else if(ev.type==='exitLocked'){
+   const bossAlive=state.bosses&&state.bosses.length>0,need=[],coreNeed=state.cores.length-popcount(state.mask);
+   if(coreNeed>0)need.push(`${coreNeed} 枚星核`);if(bossAlive)need.push('击败暗核守卫');
+   sfx('blocked');notify('出口还在休眠，还需 '+need.join('、')+'。');
+  }
+ });
+}
+function move(direction,fromDemo){
+ if(!state || state.over || $('helpDialog').open)return;
+ if(demo.active&&!fromDemo)return;
+ if(!DIRS[direction])return;
+ const result=step(state,direction);
+ if(!result.moved){sfx('blocked');notify('前方是墙壁，试试另一条路。');return;}
+ state=result.state;hintDirection=null;
+ applyEvents(result.events);
+ if(state.over){finish(state.won);return;}
  updateUI();draw();
 }
-// 暗影兽 / 暗核守卫 AI：冻结时不动；否则用 BFS 朝玩家走一步。
-// 暗影兽撞玩家：扣护盾，退回巢穴。
-// 暗核守卫撞玩家：扣护盾，退回原点 + 晕眩 2 回合；移动后若踩到激活激光则掉血，血量归零即被击溃。
-function moveMonsters(){
- if(!state.monsters.length && !(state.bosses&&state.bosses.length))return;
- if(state.freezeTurns>0){state.freezeTurns--;return;}
- const dirs=[[0,-1],[1,0],[0,1],[-1,0]],level=LEVELS[state.level];
- // 暗影兽
- state.monsters.forEach(m=>{
-  if(m.x===state.x&&m.y===state.y)return;
-  const prev=new Map(),startK=m.x+','+m.y;prev.set(startK,null);
-  const queue=[{x:m.x,y:m.y}];let goalK=null;
-  while(queue.length){
-   const cur=queue.shift();
-   if(cur.x===state.x&&cur.y===state.y){goalK=cur.x+','+cur.y;break;}
-   for(const [dx,dy] of dirs){
-    const nx=cur.x+dx,ny=cur.y+dy;
-    if(nx<0||ny<0||nx>=13||ny>=9)continue;
-    if(level.map[ny][nx]==='#')continue;
-    const k=nx+','+ny;if(prev.has(k))continue;
-    prev.set(k,cur.x+','+cur.y);queue.push({x:nx,y:ny});
-   }
-  }
-  if(goalK){let k=goalK;while(prev.get(k)!==startK)k=prev.get(k);const [sx,sy]=k.split(',').map(Number);m.x=sx;m.y=sy;}
- });
- state.monsters.forEach(m=>{if(m.x===state.x&&m.y===state.y){state.hp--;addShake(8);m.x=m.spawnX;m.y=m.spawnY;notify(state.hp?'暗影兽抓住了你！护盾 -1，它退回巢穴。':'护盾耗尽，重新出发。');}});
- // 暗核守卫
- if(state.bosses && state.bosses.length){
- state.bosses.forEach(b=>{
-  if(b.stunned>0){b.stunned--;return;}
-  if(b.x===state.x&&b.y===state.y)return;
-  const prev=new Map(),startK=b.x+','+b.y;prev.set(startK,null);
-  const queue=[{x:b.x,y:b.y}];let goalK=null;
-  while(queue.length){
-   const cur=queue.shift();
-   if(cur.x===state.x&&cur.y===state.y){goalK=cur.x+','+cur.y;break;}
-   for(const [dx,dy] of dirs){
-    const nx=cur.x+dx,ny=cur.y+dy;
-    if(nx<0||ny<0||nx>=13||ny>=9)continue;
-    if(level.map[ny][nx]==='#')continue;
-    const k=nx+','+ny;if(prev.has(k))continue;
-    prev.set(k,cur.x+','+cur.y);queue.push({x:nx,y:ny});
-   }
-  }
-  if(goalK){let k=goalK;while(prev.get(k)!==startK)k=prev.get(k);const [sx,sy]=k.split(',').map(Number);b.x=sx;b.y=sy;}
-  // 守卫踩到激活激光 → 掉血
-  const tile=level.map[b.y]?.[b.x];
-  if(tile==='^'&&laserActive(state.moves)){
-   b.hp--;const bx=b.x*TILE+TILE/2,by=b.y*TILE+TILE/2;
-   spawnBurst(bx,by,'#b2a0ed');addShake(6);
-   if(b.hp<=0){for(let i=0;i<26;i++){const a=Math.random()*6.28,sp=Math.random()*4+1;anim.particles.push({x:bx,y:by,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,life:1,color:Math.random()<0.5?'#b2a0ed':'#f4ce7f',r:Math.random()*3+1.5});}addShake(10);notify('暗核守卫被激光击溃！通道已打通。');}
-   else notify(`激光命中暗核守卫！剩余 ${b.hp} 血。`);
-  }
- });
- state.bosses.forEach(b=>{if(b.hp>0&&b.x===state.x&&b.y===state.y){state.hp--;addShake(10);b.x=b.spawnX;b.y=b.spawnY;b.stunned=2;notify(state.hp?'暗核守卫抓住你！护盾 -1，它退回原点并陷入晕眩。':'护盾耗尽。');}});
- state.bosses=state.bosses.filter(b=>b.hp>0);
- }
-}
 function finish(won){
- state.over=true;state.won=won;hintDirection=null;const stars=won?(state.hp===3&&state.moves<=LEVELS[state.level].par?3:state.hp>=2?2:1):0;
- if(won){const old=store.records[state.level];store.records[state.level]={moves:old?Math.min(old.moves,state.moves):state.moves,stars:old?Math.max(old.stars,stars):stars};save();renderTabs();}
- updateUI();draw();$('resultOverlay').hidden=false;$('resultIcon').setAttribute('href',won?'#i-flag':'#i-restart');
+ const isDemo=demo.active;
+ state.over=true;state.won=won;hintDirection=null;sfx(won?'win':'lose');const stars=won?(state.hp===3&&state.moves<=LEVELS[state.level].par?3:state.hp>=2?2:1):0;
+ if(won&&!isDemo){const old=store.records[state.level];store.records[state.level]={moves:old?Math.min(old.moves,state.moves):state.moves,stars:old?Math.max(old.stars,stars):stars};save();renderTabs();}
+ updateUI();draw();
+ if(isDemo)return; // 演示只用于观摩：不弹结算层，也不写入纪录
+ $('resultOverlay').hidden=false;$('resultIcon').setAttribute('href',won?'#i-flag':'#i-restart');
  $('resultLabel').textContent=won?(state.level===LEVELS.length-1?'MISSION ACCOMPLISHED':'SECTOR COMPLETE'):'READY FOR ANOTHER TRY';
  $('resultTitle').textContent=won?(state.level===LEVELS.length-1?'群星，为你点亮':'又一片星区被点亮'):'休整一下，再出发';
  $('resultStars').hidden=!won;$('resultStars').innerHTML=Array.from({length:3},(_,i)=>icon('star',i<stars?'':'off')).join('');$('resultStars').setAttribute('aria-label',stars+'星');
@@ -528,22 +623,66 @@ function draw(){
  round(px+16,py+17,24,16,5,'#253e40');round(px+18,py+18,19,5,2,'#37595a');ctx.fillStyle='#c6efde';ctx.fillRect(px+21,py+23,3,5);ctx.fillRect(px+32,py+23,3,5);ctx.fillStyle='#809b64';ctx.fillRect(px+24,py+36,8,2);ctx.fillStyle='#e5ffbe';ctx.fillRect(px+27,py+6,3,5);
  ctx.restore();
 }
-// A breadth-first search over position, collected cores and the 4-turn laser cycle.
-// It refuses any damaging move, so every suggestion preserves the current shields.
-function solve(s=state){
- const level=LEVELS[s.level],goal=(1<<s.cores.length)-1;
- const encode=(x,y,mask,phase)=>`${x},${y},${mask},${phase}`;
- const initial={x:s.x,y:s.y,mask:s.mask,phase:s.moves%4,previous:-1,dir:null};const queue=[initial];
- const visited=new Set([encode(initial.x,initial.y,initial.mask,initial.phase)]);
- for(let head=0;head<queue.length;head++){
-  const cur=queue[head];
-  if(cur.x===s.exit.x&&cur.y===s.exit.y&&cur.mask===goal){const path=[];let i=head;while(queue[i].previous>=0){path.push(queue[i].dir);i=queue[i].previous;}return path.reverse();}
-  for(const [dir,[dx,dy]] of Object.entries(DIRS)){
-   const x=cur.x+dx,y=cur.y+dy,tile=level.map[y]?.[x],phase=(cur.phase+1)%4;
-   if(!tile||tile==='#'||(tile==='^'&&laserActive(phase)))continue;
-   let mask=cur.mask;s.cores.forEach((c,i)=>{if(c.x===x&&c.y===y)mask|=1<<i;});const key=encode(x,y,mask,phase);
-   if(visited.has(key))continue;visited.add(key);queue.push({x,y,mask,phase,previous:head,dir});
+// 从当前局面搜索一条“不再受伤”的通关路线，返回方向数组；无解返回 null。
+// 直接复用 step()，因此激光、暗影兽、暗核守卫与道具全部计入，与实际操作完全一致。
+// 先跑带启发式的 A*（几十到几百个节点即可收敛，点一下不卡顿）；
+// 万一没收敛，再退回完备的广度优先搜索兜底。
+function planKey(st){
+ return [st.x,st.y,st.mask,st.moves%4,st.hp,st.monsters.map(m=>m.x+','+m.y).join(';'),
+  (st.bosses||[]).map(b=>b.x+','+b.y+','+b.hp+','+b.stunned).join(';'),st.freezeTurns,st.bootsTurns,
+  st.items.map(i=>i.x+','+i.y+i.type).sort().join('|')].join('#');
+}
+// 启发式：先把剩余星核收完再走向出口，并远离暗影兽、优先打掉守卫血量。
+// 这里刻意“高估”——它不是可采纳启发式，因此 A* 给出的路线不一定是最短的。
+// 实测换成可采纳版本后，守卫关要多搜一到两个数量级（L14 由 ~8ms 涨到 0.7–1.9s），
+// 而「航线提示」必须按下即出，代价不划算。折中后路线只比最短长约 1.2–1.6 倍，
+// 且全部落在三星步数目标之内，所以这里选速度。
+function planHeuristic(st){
+ let remaining=0,nearest=Infinity;
+ st.cores.forEach((c,i)=>{if(st.mask&(1<<i))return;remaining++;const d=Math.abs(st.x-c.x)+Math.abs(st.y-c.y);if(d<nearest)nearest=d;});
+ if(!remaining)nearest=Math.abs(st.x-st.exit.x)+Math.abs(st.y-st.exit.y);
+ let value=remaining*8+nearest;
+ (st.bosses||[]).forEach(b=>{value+=b.hp*10;});
+ st.monsters.forEach(m=>{const d=Math.abs(m.x-st.x)+Math.abs(m.y-st.y);if(d<3)value+=(3-d)*6;});
+ return value;
+}
+function planRoute(s,cap=20000){
+ const start=cloneState(s),minHp=s.hp,seen=new Map([[planKey(start),0]]),heap=[];
+ const push=node=>{heap.push(node);let i=heap.length-1;while(i>0){const p=(i-1)>>1;if(heap[p].f<=heap[i].f)break;const t=heap[p];heap[p]=heap[i];heap[i]=t;i=p;}};
+ const pop=()=>{const top=heap[0],last=heap.pop();if(heap.length){heap[0]=last;let i=0;for(;;){const l=2*i+1,r=l+1;let m=i;if(l<heap.length&&heap[l].f<heap[m].f)m=l;if(r<heap.length&&heap[r].f<heap[m].f)m=r;if(m===i)break;const t=heap[m];heap[m]=heap[i];heap[i]=t;i=m;}}return top;};
+ const unpack=goal=>{const path=[];let n=goal;while(n.parent){path.push(n.dir);n=n.parent;}return path.reverse();};
+ push({s:start,g:0,f:planHeuristic(start),parent:null,dir:null});
+ let nodes=0,goal=null;
+ while(heap.length){
+  const cur=pop();
+  if(++nodes>cap)break;
+  if(cur.s.over&&cur.s.won){goal=cur;break;}
+  for(const dir of Object.keys(DIRS)){
+   const result=step(cur.s,dir);
+   if(!result.moved||result.state.hp<=0||result.state.hp<minHp)continue;
+   const g=cur.g+1,k=planKey(result.state),best=seen.get(k);
+   if(best!==undefined&&best<=g)continue;
+   seen.set(k,g);
+   push({s:result.state,g,f:g+planHeuristic(result.state),parent:cur,dir});
   }
+ }
+ if(goal)return unpack(goal);
+ // 兜底：完备的广度优先搜索，保证“找不到”就是真的找不到。
+ let frontier=[{s:start,parent:null,dir:null}];const visited=new Set([planKey(start)]);nodes=0;
+ while(frontier.length){
+  const next=[];
+  for(const node of frontier){
+   if(++nodes>400000)return null;
+   if(node.s.over&&node.s.won)return unpack(node);
+   for(const dir of Object.keys(DIRS)){
+    const result=step(node.s,dir);
+    if(!result.moved||result.state.hp<=0||result.state.hp<minHp)continue;
+    const k=planKey(result.state);
+    if(visited.has(k))continue;
+    visited.add(k);next.push({s:result.state,parent:node,dir});
+   }
+  }
+  frontier=next;
  }
  return null;
 }
@@ -553,7 +692,34 @@ $('waitButton').addEventListener('click',()=>move('wait'));
 $('restartButton').addEventListener('click',()=>{loadLevel(state.level);notify('本关已重置，向新的路线出发。');});
 $('nextButton').addEventListener('click',()=>{loadLevel(state.won?(state.level+1)%LEVELS.length:state.level);canvas.focus({preventScroll:true});});
 $('replayButton').addEventListener('click',()=>{loadLevel(state.level);canvas.focus({preventScroll:true});});
-$('hintButton').addEventListener('click',()=>{const path=solve();if(path?.length){hintDirection=path[0];const hasThreat=(state.monsters.length>0)||(state.bosses&&state.bosses.length>0);notify(`航线建议：${DIR_NAMES[path[0]]}${path[0]==='wait'?'一步，让激光先切换。':'一格。虚线框已标出位置。'}${hasThreat?'（未计入暗影兽/守卫，留意追逐）':''}`);draw();}else notify('当前没有无伤路线，试试重新探索本关。');});
+// 演示解法：自动播放 planRoute() 找到的无伤路线。期间屏蔽手动输入与提示气泡，
+// 通关后重置本关，避免把演示结果写进纪录。
+function updateDemoButton(){
+ $('demoIcon').setAttribute('href',demo.active?'#i-stop':'#i-play');
+ $('demoLabel').textContent=demo.active?'停止演示':'演示解法';
+ $('demoButton').setAttribute('aria-pressed',String(demo.active));
+}
+function stopDemo(){
+ if(demo.timer){clearInterval(demo.timer);demo.timer=null;}
+ demo.active=false;demo.route=[];updateDemoButton();
+}
+function toggleDemo(){
+ if(demo.active){stopDemo();updateUI();draw();notify('演示已停止。',true);return;}
+ if(!state||state.over||$('helpDialog').open)return;
+ const path=planRoute(state);
+ if(!path||!path.length){notify('当前没有不受伤的通关路线，试试重新探索本关。');return;}
+ demo.active=true;demo.route=path.slice();updateDemoButton();updateUI();draw();
+ notify('演示开始：播放一条无伤通关路线，仅作观摩，不计入纪录。',true);
+ demo.timer=setInterval(()=>{
+  const dir=demo.route.shift();
+  if(!dir||!state){stopDemo();updateUI();return;}
+  move(dir,true);
+  if(state.over){const level=state.level;stopDemo();updateUI();loadLevel(level);notify('演示结束，轮到你了。',true);}
+ },200);
+}
+$('demoButton').addEventListener('click',toggleDemo);
+$('hintButton').addEventListener('click',()=>{const path=planRoute(state);if(path?.length){hintDirection=path[0];const hasThreat=(state.monsters.length>0)||(state.bosses&&state.bosses.length>0);notify(`航线建议：${DIR_NAMES[path[0]]}${path[0]==='wait'?'一步，让激光先切换。':'一格。虚线框已标出位置。'}${hasThreat?'（已计入暗影兽与暗核守卫）':''}`);draw();}else notify('当前没有不受伤的通关路线，试试重新探索本关。');});
+$('soundButton').addEventListener('click',()=>{soundOn=!soundOn;try{localStorage.setItem(SOUND_KEY,soundOn?'on':'off');}catch(_){}updateSoundButton();if(soundOn)sfx('core');});
 $('helpButton').addEventListener('click',()=>$('helpDialog').showModal());
 $('closeHelp').addEventListener('click',()=>$('helpDialog').close());$('startButton').addEventListener('click',()=>$('helpDialog').close());
 $('helpDialog').addEventListener('click',e=>{if(e.target===$('helpDialog')){const r=$('helpDialog').getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)$('helpDialog').close();}});
@@ -573,7 +739,7 @@ canvas.addEventListener('pointercancel',()=>{touchStart=null;});
 canvas.addEventListener('mousemove',e=>{if(!state)return;const rect=canvas.getBoundingClientRect();const sx=(e.clientX-rect.left)/rect.width*728,sy=(e.clientY-rect.top)/rect.height*504;const gx=Math.floor(sx/TILE),gy=Math.floor(sy/TILE);if(gx>=0&&gx<13&&gy>=0&&gy<9){anim.hoverX=gx;anim.hoverY=gy;}else{anim.hoverX=null;}});
 canvas.addEventListener('mouseleave',()=>{anim.hoverX=null;});
 window.addEventListener('resize',draw);
-initStars();requestAnimationFrame(animate);
+initStars();requestAnimationFrame(animate);updateSoundButton();
 loadLevel(Math.min(store.lastLevel,unlocked()));
 </script>
 </body>
