@@ -2,108 +2,181 @@
   "passed": true,
   "tests": [
     {
-      "name": "初始关卡与 14 个未解锁星区"
+      "name": "初始关卡与 25 个未解锁星区"
     },
     {
       "name": "静态默认文案与关卡数同步",
       "details": {
-        "total": 15
+        "total": 26
       }
     },
     {
-      "name": "全部 15 关均可无伤三星通关",
+      "name": "全部 26 关均可无伤三星通关",
       "details": [
         {
           "level": 1,
           "name": "初次着陆",
           "steps": 22,
-          "par": 40
+          "par": 30
         },
         {
           "level": 2,
           "name": "微光回廊",
           "steps": 24,
-          "par": 48
+          "par": 32
         },
         {
           "level": 3,
-          "name": "交错星轨",
-          "steps": 28,
-          "par": 64
+          "name": "冰河滑行",
+          "steps": 34,
+          "par": 46
         },
         {
           "level": 4,
-          "name": "静默深空",
-          "steps": 34,
-          "par": 68
+          "name": "相位回廊",
+          "steps": 42,
+          "par": 55
         },
         {
           "level": 5,
-          "name": "群星归途",
-          "steps": 28,
-          "par": 76
+          "name": "螺旋深井",
+          "steps": 24,
+          "par": 32
         },
         {
           "level": 6,
-          "name": "潮汐回响",
-          "steps": 26,
-          "par": 70
+          "name": "交错星轨",
+          "steps": 28,
+          "par": 40
         },
         {
           "level": 7,
-          "name": "镜面对称",
-          "steps": 38,
-          "par": 74
+          "name": "静默深空",
+          "steps": 35,
+          "par": 50
         },
         {
           "level": 8,
-          "name": "螺旋深井",
-          "steps": 24,
-          "par": 80
+          "name": "星门跳转",
+          "steps": 30,
+          "par": 39
         },
         {
           "level": 9,
-          "name": "迷雾裂谷",
-          "steps": 29,
-          "par": 84
+          "name": "镜面对称",
+          "steps": 30,
+          "par": 40
         },
         {
           "level": 10,
-          "name": "终极归途",
-          "steps": 40,
-          "par": 90
+          "name": "暗影追猎",
+          "steps": 24,
+          "par": 32
         },
         {
           "level": 11,
-          "name": "暗影追猎",
-          "steps": 28,
-          "par": 60
+          "name": "回旋迷宫",
+          "steps": 25,
+          "par": 35
         },
         {
           "level": 12,
-          "name": "失控回路",
-          "steps": 29,
-          "par": 58
+          "name": "冻结光束",
+          "steps": 33,
+          "par": 45
         },
         {
           "level": 13,
-          "name": "终焉追逐",
-          "steps": 56,
-          "par": 92
+          "name": "哨兵防线",
+          "steps": 26,
+          "par": 34
         },
         {
           "level": 14,
-          "name": "暗核守卫",
-          "steps": 41,
-          "par": 80
+          "name": "潮汐回响",
+          "steps": 26,
+          "par": 35
         },
         {
           "level": 15,
-          "name": "星核终焉",
-          "steps": 31,
-          "par": 96
+          "name": "群星归途",
+          "steps": 28,
+          "par": 40
+        },
+        {
+          "level": 16,
+          "name": "双子猎场",
+          "steps": 30,
+          "par": 40
+        },
+        {
+          "level": 17,
+          "name": "迷雾裂谷",
+          "steps": 35,
+          "par": 50
+        },
+        {
+          "level": 18,
+          "name": "归航星门",
+          "steps": 36,
+          "par": 50
+        },
+        {
+          "level": 19,
+          "name": "暗核守卫",
+          "steps": 26,
+          "par": 35
+        },
+        {
+          "level": 20,
+          "name": "失控回路",
+          "steps": 29,
+          "par": 40
+        },
+        {
+          "level": 21,
+          "name": "守卫围城",
+          "steps": 37,
+          "par": 50
+        },
+        {
+          "level": 22,
+          "name": "交织猎影",
+          "steps": 40,
+          "par": 55
+        },
+        {
+          "level": 23,
+          "name": "孤守星门",
+          "steps": 27,
+          "par": 36
+        },
+        {
+          "level": 24,
+          "name": "熔核走廊",
+          "steps": 29,
+          "par": 40
+        },
+        {
+          "level": 25,
+          "name": "双生守卫",
+          "steps": 29,
+          "par": 40
+        },
+        {
+          "level": 26,
+          "name": "推箱工坊",
+          "steps": 52,
+          "par": 69
         }
       ]
+    },
+    {
+      "name": "激光坐标缓存与地图一致",
+      "details": {
+        "levels": 26,
+        "traps": 155
+      }
     },
     {
       "name": "真实键盘移动"
@@ -115,101 +188,167 @@
       "name": "玩法弹窗与输入隔离"
     },
     {
-      "name": "演示解法可播放且不计入纪录",
+      "name": "演示解法可播放且不计入纪录/成就",
       "details": {
         "peakSteps": 21
       }
     },
     {
-      "name": "实际输入通关全部 15 关",
+      "name": "实际输入通关全部 26 关",
       "details": [
         {
           "level": 1,
           "steps": 22,
-          "par": 40
+          "par": 30
         },
         {
           "level": 2,
           "steps": 24,
-          "par": 48
+          "par": 32
         },
         {
           "level": 3,
-          "steps": 28,
-          "par": 64
+          "steps": 34,
+          "par": 46
         },
         {
           "level": 4,
-          "steps": 34,
-          "par": 68
+          "steps": 42,
+          "par": 55
         },
         {
           "level": 5,
-          "steps": 28,
-          "par": 76
+          "steps": 24,
+          "par": 32
         },
         {
           "level": 6,
-          "steps": 26,
-          "par": 70
+          "steps": 28,
+          "par": 40
         },
         {
           "level": 7,
-          "steps": 38,
-          "par": 74
+          "steps": 35,
+          "par": 50
         },
         {
           "level": 8,
-          "steps": 24,
-          "par": 80
+          "steps": 30,
+          "par": 39
         },
         {
           "level": 9,
-          "steps": 29,
-          "par": 84
+          "steps": 30,
+          "par": 40
         },
         {
           "level": 10,
-          "steps": 40,
-          "par": 90
+          "steps": 24,
+          "par": 32
         },
         {
           "level": 11,
-          "steps": 28,
-          "par": 60
+          "steps": 25,
+          "par": 35
         },
         {
           "level": 12,
-          "steps": 29,
-          "par": 58
+          "steps": 33,
+          "par": 45
         },
         {
           "level": 13,
-          "steps": 56,
-          "par": 92
+          "steps": 26,
+          "par": 34
         },
         {
           "level": 14,
-          "steps": 41,
-          "par": 80
+          "steps": 26,
+          "par": 35
         },
         {
           "level": 15,
-          "steps": 31,
-          "par": 96
+          "steps": 28,
+          "par": 40
+        },
+        {
+          "level": 16,
+          "steps": 30,
+          "par": 40
+        },
+        {
+          "level": 17,
+          "steps": 35,
+          "par": 50
+        },
+        {
+          "level": 18,
+          "steps": 36,
+          "par": 50
+        },
+        {
+          "level": 19,
+          "steps": 26,
+          "par": 35
+        },
+        {
+          "level": 20,
+          "steps": 29,
+          "par": 40
+        },
+        {
+          "level": 21,
+          "steps": 37,
+          "par": 50
+        },
+        {
+          "level": 22,
+          "steps": 40,
+          "par": 55
+        },
+        {
+          "level": 23,
+          "steps": 27,
+          "par": 36
+        },
+        {
+          "level": 24,
+          "steps": 29,
+          "par": 40
+        },
+        {
+          "level": 25,
+          "steps": 29,
+          "par": 40
+        },
+        {
+          "level": 26,
+          "steps": 52,
+          "par": 69
         }
       ]
     },
     {
-      "name": "暗核守卫由激光逐格击溃"
+      "name": "暗核守卫由激光逐格击溃",
+      "details": [
+        "L19",
+        "L21",
+        "L23",
+        "L25"
+      ]
     },
     {
       "name": "暗影兽关全程未被抓住",
       "details": {
         "levels": [
+          "L10",
           "L11",
-          "L12",
-          "L13"
+          "L16",
+          "L17",
+          "L20",
+          "L21",
+          "L22",
+          "L26"
         ]
       }
     },
@@ -218,6 +357,32 @@
     },
     {
       "name": "刷新后通关纪录保留"
+    },
+    {
+      "name": "成就徽章随通关进度解锁",
+      "details": {
+        "got": 13,
+        "total": 18,
+        "bar": "72.2222%",
+        "missing": [
+          "last-stand",
+          "patient",
+          "pathfinder",
+          "phase-master",
+          "crate-master"
+        ]
+      }
+    },
+    {
+      "name": "成就弹窗可打开并隔离输入"
+    },
+    {
+      "name": "累计统计驱动成就解锁",
+      "details": {
+        "hints": 11,
+        "waits": 38,
+        "staticCache": 2
+      }
     },
     {
       "name": "未集齐星核时出口保持锁定"
@@ -230,6 +395,20 @@
     },
     {
       "name": "激光节奏、护盾扣减、失败与重试"
+    },
+    {
+      "name": "pathFirstStep 起点=终点不死循环"
+    },
+    {
+      "name": "激光状态栏只描述下一步且不自相矛盾",
+      "details": {
+        "samples": [
+          "激光：下一步开启 · 危险，勿踩入",
+          "激光：下一步关闭 · 安全，可以通过",
+          "激光：下一步关闭 · 安全，可以通过",
+          "激光：下一步开启 · 危险，勿踩入"
+        ]
+      }
     },
     {
       "name": "暗影兽按最短路径追击玩家",
@@ -245,7 +424,37 @@
       }
     },
     {
-      "name": "撞上暗影兽扣 1 护盾并退回巢穴"
+      "name": "撞上暗影兽扣 1 护盾并退回巢穴附近",
+      "details": {
+        "x": 5,
+        "y": 4,
+        "d": 1
+      }
+    },
+    {
+      "name": "撞兽后暗影兽退回相邻格并重整 1 回合",
+      "details": {
+        "afterCatch": {
+          "x": 5,
+          "y": 4,
+          "refit": 1
+        },
+        "hpTrace": [
+          2,
+          1,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "单回合伤害上限为 1 格护盾（全关卡穷举）",
+      "details": {
+        "levels": 26
+      }
+    },
+    {
+      "name": "暗影兽与守卫互斥占位（全关卡穷举）"
     },
     {
       "name": "撞上暗核守卫扣 1 护盾并晕眩 2 回合"
@@ -260,10 +469,27 @@
       }
     },
     {
-      "name": "闪现靴免疫激光"
+      "name": "闪现靴免疫激光且足 2 步"
     },
     {
       "name": "关卡选择、方向按钮与等待按钮"
+    },
+    {
+      "name": "撤销可回退步数/位置/统计且换关清栈",
+      "details": {
+        "beforeUndo": {
+          "x": 3,
+          "moves": 2,
+          "statMoves": 848,
+          "stack": 2
+        },
+        "afterUndo": {
+          "x": 2,
+          "moves": 1,
+          "statMoves": 847,
+          "stack": 1
+        }
+      }
     },
     {
       "name": "桌面布局无水平溢出",
@@ -271,7 +497,7 @@
         "width": 1440,
         "scrollWidth": 1425,
         "canvasWidth": 822,
-        "height": 1410
+        "height": 1922
       }
     },
     {
@@ -282,22 +508,55 @@
         "canvasWidth": 322,
         "buttons": [
           {
-            "w": 35,
-            "h": 35
+            "w": 44,
+            "h": 44
           },
           {
-            "w": 35,
-            "h": 35
+            "w": 44,
+            "h": 44
           },
           {
-            "w": 35,
-            "h": 35
+            "w": 44,
+            "h": 44
           },
           {
-            "w": 35,
-            "h": 35
+            "w": 44,
+            "h": 44
           }
         ]
+      }
+    },
+    {
+      "name": "窄屏星区列表折叠/展开",
+      "details": {
+        "collapsed": {
+          "toggleHidden": false,
+          "expanded": "false",
+          "visible": 1,
+          "boardTop": 433.09375
+        },
+        "expanded": {
+          "expanded": "true",
+          "visible": 26,
+          "boardTop": 843.09375
+        },
+        "back": 1
+      }
+    },
+    {
+      "name": "棋盘下方原地等待按钮（≥44px）",
+      "details": {
+        "h": 44,
+        "w": 334,
+        "withinBoard": true
+      }
+    },
+    {
+      "name": "鼠标点击相邻格即可移动",
+      "details": {
+        "x": 2,
+        "y": 1,
+        "moves": 1
       }
     },
     {
@@ -306,11 +565,27 @@
     {
       "name": "手机通关弹层按钮完整可见",
       "details": {
-        "overlayBottom": 772.015625,
-        "nextBottom": 720.546875,
-        "nextTop": 687.546875,
-        "overlayTop": 539.09375
+        "overlayBottom": 667.015625,
+        "nextBottom": 615.546875,
+        "nextTop": 582.546875,
+        "overlayTop": 434.09375
       }
+    },
+    {
+      "name": "终章展示旅程总账与庆祝粒子",
+      "details": {
+        "label": "MISSION ACCOMPLISHED",
+        "title": "群星，为你点亮",
+        "next": "回到起点，挑战满星 →",
+        "blocks": 4,
+        "particles": 70
+      }
+    },
+    {
+      "name": "普通关结算层不显示终章总账"
+    },
+    {
+      "name": "测试后状态复位（清除 1~19 关补齐的纪录）"
     },
     {
       "name": "320像素窄屏无水平溢出"
@@ -323,6 +598,356 @@
     },
     {
       "name": "音效开关可切换并持久化"
+    },
+    {
+      "name": "相位器：拾取充能 / 调相耗一步并翻转激光相位",
+      "details": {
+        "gotCharges": 1,
+        "phase": 1,
+        "statPhases": 1
+      }
+    },
+    {
+      "name": "相位回廊最优解确实用到相位器",
+      "details": {
+        "phaseSteps": 1
+      }
+    },
+    {
+      "name": "可推箱 / 压力板 / 闸门",
+      "details": {
+        "push": {
+          "moved": true,
+          "crate": "4,3",
+          "player": "3,3"
+        },
+        "blocked": {
+          "moved": false,
+          "crate": "1,3",
+          "moves": 0
+        },
+        "onPlate": true,
+        "offPlate": false,
+        "gateBlocked": true,
+        "playerOnPlate": true,
+        "pushOntoPlate": {
+          "crate": "5,4",
+          "gate": true
+        },
+        "plate": "5,4"
+      }
+    },
+    {
+      "name": "星箱确实挡住暗影兽并迫使绕行",
+      "details": {
+        "free": {
+          "at": [
+            3,
+            6
+          ],
+          "hp": 3
+        },
+        "blocked": {
+          "at": [
+            2,
+            7
+          ],
+          "hp": 3
+        }
+      }
+    },
+    {
+      "name": "终章的星箱是必经之路（拿掉即无解）",
+      "details": {
+        "withCrate": 52,
+        "noCrate": null
+      }
+    },
+    {
+      "name": "传送门成对互逆且不额外耗步",
+      "details": {
+        "pairs": 2,
+        "landed": "10,4",
+        "expected": "10,4",
+        "delta": 1,
+        "back": "2,4"
+      }
+    },
+    {
+      "name": "巡逻哨兵位置由步数决定且能造成伤害",
+      "details": {
+        "seq": [
+          "4,4",
+          "5,4",
+          "6,4",
+          "5,4",
+          "4,4",
+          "5,4"
+        ],
+        "cycle": 4,
+        "hitHp": 2,
+        "safeHp": 3,
+        "sentinelAt0": "4,4"
+      }
+    },
+    {
+      "name": "伤害预算：无伤无解时降档给出带伤害的路线",
+      "details": {
+        "noBudget": null,
+        "withBudget": 10,
+        "adaptiveBudget": 1,
+        "adaptiveLen": 10
+      }
+    },
+    {
+      "name": "伤害预算决定二星容错（不再写死 1 格）",
+      "details": {
+        "b1": 1,
+        "b2": 2,
+        "par1": 32,
+        "three": 3,
+        "slowClean": 2,
+        "dmg1": 2,
+        "overBudget": 1,
+        "budget2ok": 2,
+        "lost": 0
+      }
+    },
+    {
+      "name": "冒险路线表自洽且有实际取舍",
+      "details": {
+        "total": 26,
+        "bad": [],
+        "wrong": [],
+        "withLine": 16,
+        "sample": {
+          "steps": 22,
+          "damage": 1
+        }
+      }
+    },
+    {
+      "name": "任务卡展示冒险路线取舍",
+      "details": {
+        "a": {
+          "hidden": false,
+          "text": "冒险路线 22 步 · 承受 1 格护盾，更快但止步二星"
+        },
+        "b": {
+          "hidden": true
+        }
+      }
+    },
+    {
+      "name": "新机制图例与调相按钮按关显示",
+      "details": {
+        "a": {
+          "phase": true,
+          "crate": false,
+          "btn": true
+        },
+        "b": {
+          "crate": true,
+          "gate": true,
+          "plate": true,
+          "phase": false,
+          "btn": false
+        },
+        "c": {
+          "portal": true,
+          "phase": false,
+          "btn": false
+        },
+        "d": {
+          "patrol": true
+        },
+        "e": {
+          "crate": false,
+          "phase": false,
+          "patrol": false,
+          "ice": false,
+          "frozen": false,
+          "btn": false
+        },
+        "f": {
+          "ice": true,
+          "frozen": false,
+          "phase": false,
+          "patrol": false
+        },
+        "g": {
+          "ice": true,
+          "frozen": true,
+          "patrol": false
+        }
+      }
+    },
+    {
+      "name": "冰面滑行：整段 1 步 / 撞墙停下 / 沿途星核穿过即拾取",
+      "details": {
+        "slide": {
+          "moves": 1,
+          "x": 9,
+          "y": 2,
+          "slides": 1,
+          "tiles": 8
+        },
+        "scoop": {
+          "moves": 1,
+          "x": 9,
+          "mask": 1,
+          "got": true,
+          "slides": 1
+        },
+        "coreCount": 1
+      }
+    },
+    {
+      "name": "冻结激光：滑过安全 / 停在上面按节奏掉血",
+      "details": {
+        "over": {
+          "hp": 3,
+          "x": 9,
+          "moves": 1,
+          "laser": true
+        },
+        "stopOn": {
+          "hp": 2,
+          "x": 9,
+          "moves": 1,
+          "laser": true
+        },
+        "stopOff": {
+          "hp": 3,
+          "x": 9,
+          "moves": 2,
+          "laser": false
+        },
+        "traps": "7/8"
+      }
+    },
+    {
+      "name": "第 25/26 关最优解确实用到冰面与冻结激光",
+      "details": {
+        "l25": {
+          "steps": 34,
+          "slides": 11,
+          "maxSlide": 9,
+          "frozen": 0,
+          "hp": 3,
+          "won": true
+        },
+        "l26": {
+          "steps": 33,
+          "slides": 5,
+          "maxSlide": 8,
+          "frozen": 2,
+          "hp": 3,
+          "won": true
+        },
+        "want": [
+          34,
+          33
+        ]
+      }
+    },
+    {
+      "name": "每日挑战：日期做种、同图可解且目标步数合理",
+      "details": {
+        "same": true,
+        "diff": true,
+        "par": 46,
+        "opt": 38,
+        "attempt": 0,
+        "cores": 4,
+        "parOk": true,
+        "solvable": true
+      }
+    },
+    {
+      "name": "每日挑战的标题、图例与关卡高亮",
+      "details": {
+        "level": 26,
+        "title": "每日挑战",
+        "tag": "DAILY",
+        "cores": 4,
+        "par": 41,
+        "active": true,
+        "tabs": 0,
+        "legendCrate": false,
+        "wallHidden": true,
+        "backVisible": true,
+        "aria": "每日挑战，探索者在第2行第2列，3格护盾，已收集0/4枚星核，0步。"
+      }
+    },
+    {
+      "name": "每日挑战通关只写每日纪录",
+      "details": {
+        "won": true,
+        "moves": 34,
+        "hp": 3,
+        "route": 34,
+        "stars": 3,
+        "dailyMoves": 34,
+        "streak": 1,
+        "recordsSame": true,
+        "flawlessDelta": 0,
+        "movesDelta": 34,
+        "shareHidden": false,
+        "label": "DAILY CLEARED"
+      }
+    },
+    {
+      "name": "每日挑战战绩可分享且不泄漏地图",
+      "details": {
+        "text": "星核迷航 · 每日挑战 2026-11-20 / ★★★ 34 步（目标 41，提前 7 步） / 连续 1 天"
+      }
+    },
+    {
+      "name": "每日挑战连续天数计算",
+      "details": {
+        "cont": 4,
+        "gap": 1,
+        "same": 3,
+        "first": 1
+      }
+    },
+    {
+      "name": "返回战役后每日状态复位",
+      "details": {
+        "level": 0,
+        "title": "初次着陆",
+        "active": false,
+        "btn": "再挑战一次",
+        "best": "今日最佳 34 步 · ★★★",
+        "wallHidden": false,
+        "backVisible": false,
+        "cleared": "今日未挑战",
+        "btnCleared": "开始今日挑战"
+      }
+    },
+    {
+      "name": "存档按地图指纹迁移，重排不串关",
+      "details": {
+        "j": 6,
+        "hit": true,
+        "stars": 3,
+        "wrong": false,
+        "wrongName": "相位回廊",
+        "last": 0,
+        "unlocked": 0,
+        "lastName": "初次着陆"
+      }
+    },
+    {
+      "name": "新格式存档往返一致",
+      "details": {
+        "j": 6,
+        "hit": true,
+        "stars": 3,
+        "keys": 26,
+        "lastKeyOk": true
+      }
     },
     {
       "name": "浏览器无脚本异常"

@@ -1,2 +1,10 @@
 # 测试用的临时 Chrome 用户数据目录（含缓存/会话数据，不应入库）
 tests/browser-profile/
+tests/browser-profile-2/
+browser-profile/
+
+# 工作台的项目内部数据（不随仓库分发；对外日志在 log/memory/）
+.workbuddy-ai/
+
+# 推送脚本内含 GitHub 凭据，永不入库
+_push_api.cjs

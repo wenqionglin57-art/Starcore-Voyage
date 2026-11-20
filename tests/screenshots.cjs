@@ -5,9 +5,12 @@
  *
  * game-test.cjs already writes the three full-page shots (desktop / mobile /
  * mobile-result) as part of the acceptance run. This script exists for the
- * close-ups: the header controls, the sector tabs with their star badges, and
- * the board footer (hint + demo buttons, idle and running). It is handy when
- * reviewing a UI change without re-running the whole suite.
+ * close-ups: the header controls, the sector tabs with their star badges, the
+ * board footer (hint + demo buttons, idle and running), the achievements card
+ * plus the full badge panel, the four new-mechanic boards (phase shifter,
+ * pushable crate, portal pair, patrol sentinel), and the daily-challenge card
+ * with its shareable result. It is handy when reviewing a UI change without
+ * re-running the whole suite.
  *
  *   node tests/screenshots.cjs
  *
@@ -148,20 +151,22 @@ async function main() {
   await cmd('Runtime.enable');
 
   // Start from a clean save so the star badges show a realistic early state.
+  // SEEN_KEY 也一并清掉再关弹窗：首次访问会自动展开玩法指南，留着它会把每个截图
+  // 都盖上一层遮罩。
   await viewport(1440, 1200, false);
   await navigate();
-  await evaluate('localStorage.removeItem(STORAGE_KEY)');
+  await evaluate('localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(SEEN_KEY)');
   await navigate();
+  await evaluate("$('helpDialog').open&&$('helpDialog').close()");
 
   // Play a few sectors so the tabs show a mix of stars, then sit on a laser
   // sector where the footer tip carries the most information.
+  // freshState() 由页面导出，随机制一起演进——这里不再手抄状态字段，
+  // 否则新增机制（箱子 / 相位器 / 传送门…）时截图会静默少字段。
   await evaluate(`(()=>{
-    const fresh=i=>{const p=parseMap(LEVELS[i]);return {level:i,x:p.start.x,y:p.start.y,moves:0,hp:3,mask:0,
-      cores:p.cores,traps:p.traps,items:p.items,monsters:p.monsters,bosses:p.bosses,exit:p.exit,
-      over:false,won:false,freezeTurns:0,bootsTurns:0};};
     for (let i=0;i<5;i++){
       loadLevel(i);
-      const route=planRoute(fresh(i));
+      const route=planRoute(freshState(i));
       if (route) for (const d of route) move(d);
     }
     save();
@@ -174,6 +179,9 @@ async function main() {
   await clip('header-desktop.png', '.site-header');
   await clip('progress-desktop.png', '.levels');
   await clip('footer-desktop.png', '.board-footer');
+  // 「当前任务」卡片现在排在最前，三星条件 / 最佳纪录 / 激光相位都在这里。
+  await clip('mission-desktop.png', '.mission');
+  await clip('board-wait-desktop.png', '.board-wait');
 
   // The demo button should flip to a highlighted "stop" state.
   await evaluate("$('demoButton').click()");
@@ -194,12 +202,75 @@ async function main() {
   await evaluate("$('closeHelp').click()");
   await settle(200);
 
+  // Achievements: the sidebar card, then the full badge panel.
+  console.log('  badges unlocked:', await evaluate("$('achCount').textContent"));
+  await clip('achievements-desktop.png', '.achievements-card');
+  await evaluate("$('achOpenButton').click()");
+  await settle(350);
+  await clip('badges-desktop.png', '#achievementDialog');
+  await evaluate("$('closeAchievementsButton').click()");
+  await settle(200);
+
+  // 新机制特写（第 21–26 关）：相位器 / 可推箱 / 传送门 / 巡逻哨兵 / 冰面 / 冻结激光各截一张棋盘图。
+  // 这几关默认锁着，loadLevel() 对未解锁星区会静默返回，所以先把前面各关的纪录补齐。
+  await evaluate(`(()=>{
+    for(let i=0;i<LEVELS.length-1;i++) if(!store.records[i]) store.records[i]={moves:1,stars:3};
+    save(); renderTabs();
+  })()`);
+  // 按关卡名取索引：重排后写死的序号会截到别的关，截出来还是「通过」但内容是错的。
+  for (const [levelName, name] of [
+    ['相位回廊', 'mechanic-phase.png'],
+    ['推箱工坊', 'mechanic-crate.png'],
+    ['星门跳转', 'mechanic-portal.png'],
+    ['哨兵防线', 'mechanic-sentinel.png'],
+    ['冰河滑行', 'mechanic-ice.png'],
+    ['冻结光束', 'mechanic-frozen.png'],
+  ]) {
+    await evaluate(`loadLevel(LEVELS.findIndex(l=>l.name===${JSON.stringify(levelName)}));state.hp=3;state.phaseCharges=1;updateUI();draw();`);
+    await settle(300);
+    console.log('  sector', await evaluate('state.level+1'), await evaluate('LEVELS[state.level].name'));
+    await clip(name, '.game-panel', 1.5);
+  }
+
+  // 每日挑战：侧栏卡片、进入后的棋盘、通关后的分享按钮。
+  await evaluate('genDaily(dailyStamp());loadDaily()');
+  await settle(350);
+  await clip('daily-card-desktop.png', '.daily-card');
+  console.log('  daily par:', await evaluate('DAILY.par'), '| optimal:', await evaluate('DAILY.optimal'));
+  await evaluate('(()=>{const r=planRoute(state);if(r)for(const d of r)move(d);})()');
+  await settle(700);
+  console.log('  daily cleared:', await evaluate('state.won'), '| share visible:', await evaluate("!$('shareButton').hidden"));
+  await clip('daily-result-desktop.png', '#resultOverlay');
+  await evaluate("$('resultOverlay').hidden=true");
+  // 回到战役再切手机视口：每日模式下关卡墙是隐藏的，直接截会得到 0×0。
+  await evaluate('loadLevel(0)');
+
   await viewport(390, 900, true);
   await settle(400);
   console.log('mobile 390  scrollWidth:', await evaluate('document.documentElement.scrollWidth'));
   await clip('header-mobile.png', '.site-header');
-  await clip('progress-mobile.png', '.levels');
+  // 折叠态下的关卡墙：只剩当前关 + 一个展开按钮。
+  await clip('progress-mobile.png', '#levelTabs');
+  await clip('levels-toggle-mobile.png', '.levels-toggle');
   await clip('footer-mobile.png', '.board-footer');
+  await clip('board-wait-mobile.png', '.board-wait');
+  await clip('achievements-mobile.png', '.achievements-card');
+  await clip('daily-card-mobile.png', '.daily-card');
+
+  // 终章结算层：把 1~19 关补齐后走完最后一关，抓一张「旅程总账」。
+  await viewport(1440, 1200, false);
+  await evaluate(`(async()=>{
+    for(let i=0;i<LEVELS.length-1;i++){
+      const r=planRoute(freshState(i),400000);
+      if(r) store.records[i]={moves:r.length,stars:3};
+    }
+    save();loadLevel(LEVELS.length-1);
+    const route=planRoute(state);
+    for(const d of route) move(d);
+  })()`);
+  await settle(900);
+  console.log('finale overlay open:', await evaluate("!$('resultOverlay').hidden"));
+  await clip('finale-desktop.png', '#resultOverlay');
 
   await send('Browser.close');
   socket.close();
